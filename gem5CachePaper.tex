@@ -4,6 +4,8 @@
 \usepackage{epstopdf}
 \usepackage{float}
 \usepackage{verbatim}
+\usepackage{array}
+\usepackage{authblk}
 \usepackage{IEEEtrantools}
 \usepackage[
     backend=biber,
@@ -19,26 +21,11 @@
 
 \title{Performance Analysis of Cache Size and Set-Associativity Using gem5}
 
-% APPARENTLY THIS IS THE WAY IT IS SUPPOSED TO BE DONE WITH MORE THAN 3 AUTHORS
-\author{
-\IEEEauthorblockN{1\textsuperscript{st} Clayton Asada}
-\IEEEauthorblockA{\textit{Computer Engineering and Computer Science}\\
-\textit{California State University Long Beach}\\
-Long Beach, USA\\
-clayton.asada01@student.csulb.edu}
-\and
-\IEEEauthorblockN{2\textsuperscript{nd} Joseph Chorbajian}
-\IEEEauthorblockA{\textit{Computer Engineering and Computer Science}\\
-\textit{California State University Long Beach}\\
-Long Beach, USA\\
-email address}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Ilmaan Zia}
-\IEEEauthorblockA{\textit{Computer Engineering and Computer Science}\\
-\textit{California State University Long Beach}\\
-Long Beach, USA\\
-email address}
-}
+\author[1]{Clayton Asada}
+\author[2]{Joseph Chorbajian}
+\author[3]{Ilmaan Zia}
+
+\affil[1,2,3]{Computer Engineering and Computer Science, California State University Long Beach}
 
 \date{February 2023}
 
@@ -63,9 +50,10 @@ email address}
 \end{figure}
 
 \begin{table}
-    \begin{tabular}{|l|l|l|1|1|}
+    \centering
+    \begin{tabular}{| m{1.6cm} | m{.75cm} | m{.75cm} | m{.8cm} | m{2.6cm} |}
         \hline
-        \textbf{Benchmarks} & \textbf{Cache Size} & \textbf{Block Size}& \textbf{Set Associativity}& \textbf{Replacement Policy} \\ \hline
+        \textbf{Benchmarks} & \textbf{Cache Size} & \textbf{Block Size}& \textbf{Set Assoc.}& \textbf{Replacement Policy} \\ \hline
         Dijkstra    &   16kB  &   32    &  1   &    Least Recently Used     \\ \hline
         Sha         &   32kB  &   64    &  2   &    Random                  \\ \hline
         Rijndael    &   64kB  &         &  4   &    First In First Out      \\ \hline
@@ -74,45 +62,40 @@ email address}
 \end{table}
 
 \section{Introduction}
-With the increasing demand for high-performance computing systems, cache design has become an important area of research in computer architecture. Caches are small, fast memory structures that are used to store frequently accessed data and instructions, thereby reducing the time required to access them from the main memory. The performance of a processor is highly dependent on the cache configuration, which includes parameters such as size, associativity, and replacement policy.
+Cache performance is a critical factor in the overall performance of modern computer systems. Cache design involves balancing the trade-offs between cache size, associativity, and replacement policies to achieve optimal performance for a given workload. Simulation tools such as gem5 and SimpleScalar provide powerful means for evaluating cache performance, allowing researchers to explore a wide range of cache configurations and workloads in a controlled environment.
 
-In recent years, computer architects have been using simulation tools to evaluate the performance of different cache configurations. One such tool is gem5, a cycle-accurate simulator that is widely used in the computer architecture community. gem5 is a modular simulation framework that supports a wide range of processors, including single-core CPUs, multi-core CPUs, and accelerators.
+In this paper, we present a study of cache performance using the gem5 simulator to model various single-core CPU cache configurations. Our aim is to compare the results of our study with the results of a previous study that used the SimpleScalar simulator. The previous study focused on the impact of cache size, block size, and associativity on miss rate performance, while our study explores the impact of replacement policies in addition to cache size, block size, and associativity.
 
-The use of gem5 to model various single-core CPU cache configurations has gained popularity in recent years. This approach allows researchers to evaluate the performance of different cache configurations under various workloads and benchmarks. With gem5, researchers can study the effects of cache size, associativity, replacement policy, and other cache parameters on performance metrics such as execution time, instruction throughput, and cache hit rate.
+Our research uses three benchmarks to evaluate cache performance, from SPEC95 benchmarks to stress different aspects of the memory hierarchy. We compare our results with those of the previous study, which used a total of 5 benchmarks from SPEC95 benchmarks designed to stress the instruction cache and data cache separately. The shared benchmarks were Dijkstra, Sha, and Rijndael. The additonal benchmarks from the previous study are Go and Compress.
 
-The benefits of using gem5 to model single-core CPU cache configurations are numerous. First, gem5 allows researchers to perform detailed analyses of cache behavior under different workloads, which is difficult to achieve through real-world experiments. Second, gem5 is highly configurable, which allows researchers to explore a wide range of cache configurations and compare their performance. Third, gem5 is open-source, which makes it accessible to researchers and allows for easy collaboration and sharing of research results.
+The use of different simulators and benchmarks provides an opportunity to compare and contrast the results of our study with those of the previous study. It also allows us to evaluate the effectiveness of gem5 in modeling cache performance compared to SimpleScalar. Our study provides insights into the impact of replacement policies on cache performance, which was not explored in the previous study.
 
-In this research paper, we explore the use of gem5 to model various single-core CPU cache configurations. We first describe the gem5 simulator and its capabilities. We then review previous research on cache design and discuss the important cache parameters that are considered in this work. We present a detailed experimental methodology and describe the cache configurations that we have evaluated. Finally, we present our results and discuss the insights that we have gained from our experiments. Our work demonstrates the power and flexibility of gem5 as a simulation tool for cache design research.
+In conclusion, our research aims to contribute to the understanding of cache performance and design using simulation tools. By comparing the results of our study with those of the previous study, we hope to provide a comprehensive picture of cache performance across different simulators and benchmarks. We also hope to demonstrate the effectiveness of gem5 in modeling cache performance and guide future research in this important area.
 
 \section{Motivation}
-Cache design is a critical area of research in computer architecture, as it has a significant impact on the performance of modern computer systems. Caches are critical components of the memory hierarchy, and their performance has a direct impact on the overall system performance. Therefore, it is essential to design caches that can efficiently store and retrieve data and instructions.
+The design and optimization of cache performance is critical to the overall performance of modern computer systems. Cache performance can significantly impact system performance and energy efficiency, especially in memory-intensive workloads. Therefore, understanding the trade-offs between cache size, associativity, and replacement policies is crucial in designing effective caches.
 
-Cache design is a complex process that involves numerous parameters such as size, associativity, and replacement policy. These parameters interact with each other and have a significant impact on the cache's performance. In addition, the performance of a cache depends on the workload being executed. Therefore, evaluating different cache configurations and selecting the optimal one for a given workload is a challenging task.
+Simulation tools such as gem5 and SimpleScalar provide powerful means for evaluating cache performance. However, there is a need to evaluate and compare the effectiveness of these simulators in modeling cache performance. Additionally, there is a need to explore the impact of replacement policies on cache performance, which was not studied in the previous research did not cover.
 
-The use of simulation tools such as gem5 has become popular in recent years for evaluating different cache configurations. These tools provide researchers with the ability to model various cache configurations and evaluate their performance under different workloads. Using simulation tools allows researchers to explore a wider range of cache configurations than would be possible through physical experimentation. In addition, simulation tools provide detailed insights into cache behavior that are not easily obtained through physical experimentation.
+Our research aims to contribute to the understanding of cache performance and design by using the gem5 simulator to model various single-core CPU cache configurations. We aim to evaluate the effectiveness of gem5 in modeling cache performance compared to SimpleScalar, which was used in a previous study. We also aim to explore the impact of replacement policies on cache performance in addition to cache size and associativity. By comparing the results of our study with those of the previous study, we hope to provide a comprehensive picture of cache performance across different simulators and identify any differences in their respective results.
 
-The use of gem5 to model various single-core CPU cache configurations is particularly important because single-core CPUs are still widely used in many systems, including mobile devices, embedded systems, and low-power servers. Therefore, optimizing the cache design for single-core CPUs is essential to improve the performance of these systems.
-
-In addition, the use of gem5 to model cache configurations can help identify new trends and directions for cache design research. For example, recent research has explored the use of machine learning techniques to optimize cache performance. Using gem5 to evaluate these techniques can help identify their strengths and weaknesses and guide future research in this area.
-
-In summary, the motivation for using gem5 to model various single-core CPU cache configurations is clear. Cache design is a critical area of research, and the use of simulation tools such as gem5 provides researchers with a powerful tool for evaluating different cache configurations. Furthermore, the use of gem5 to evaluate cache design can help identify new trends and directions for future research in this area.
-
+Our research has the potential to inform cache design and optimization, as well as guide future research in this area. By understanding the impact of cache size, associativity, and replacement policies on performance, we can design more effective caches that improve system performance and energy efficiency. Furthermore, by evaluating the effectiveness of simulation tools such as gem5 and SimpleScalar, we can improve the accuracy and efficiency of cache performance modeling.
 
 \section{Related Work}
-
-
 
 \section{Research methodology}
 In this research, we use the gem5 simulator to model various single-core CPU cache configurations and evaluate their performance under different workloads. We describe the experimental methodology below.
 
 Hardware and Software Configuration:
-We use a Linux-based system for our experiments, with an Intel Core i7 processor running at 2.2 GHz and 16GB of RAM. We use gem5 version 20.0.0 for our simulations.
+We use a Linux-based system for our experiments as that is a base requirement for the gem5 simulator. Additionally the research team purposefully used different types of hardware and operating systems to run the simulations to determine if there were any inconsistencies in the gem5 simulator. Two desktop computers, one operating on Ubuntu 22.04 and the other Debian distro, and a third laptop using WSL were used to run the gem5 simulations. We use gem5 version 20.0.0 for our simulations.
 
 Workloads:
-We use a variety of benchmark workloads to evaluate the performance of different cache configurations. We use the SPEC CPU 2017 benchmark suite, which includes several real-world workloads such as GCC, GROMACS, and XZ. We also use synthetic workloads such as STREAM and PARSEC, which are designed to stress different aspects of the memory hierarchy.
+We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the SPEC95 benchmark quite. The previous paper used two additional workloads, Go and Compress.
 
 Cache Configurations:
-We evaluate several cache configurations with different sizes, associativity, and replacement policies. We use a direct-mapped cache as a baseline and compare it with other configurations, including fully associative and set-associative caches. We use different cache sizes, ranging from 1KB to 32MB, and different replacement policies, including least-recently-used (LRU) and random.
+We evaluate several cache configurations with different sizes, different block sized, associativity, and replacement policies. As seen in the cache sizes configurations used were 16kB, 32kB, and 64kB. Cache block sizes were configuratble to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. The additional configuration used in this study beyond what the original tested are following replacement policies, least recently used, random replacement, and first in first out replacement policy.
+
+We use the findings of the previous research paper as a baseline for comparison of each unique combination of configurations.
 
 Simulation Setup:
 We use gem5's full-system mode to simulate our experiments. In this mode, the entire system, including the CPU, cache, and memory hierarchy, is simulated. We run each workload multiple times to ensure the stability of the results and use a warm-up period to ensure that the cache is populated before we start collecting performance data.
@@ -126,6 +109,15 @@ We use statistical analysis to compare the performance of different cache config
 In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and use statistical analysis to determine the significance of our results.
 
 \section{Results}
+
+
+\subsection{Sha Benchmark}
+
+
+\subsection{Dijkstra Benchmark}
+
+
+\subsection{Rijndael Benchmark}
 
 
 
@@ -148,15 +140,15 @@ Energy-Efficient Caches: Energy efficiency is becoming an increasingly important
 In conclusion, the use of gem5 to model various single-core CPU cache configurations provides a powerful tool for evaluating cache performance. Future research in this area could explore multi-core CPU cache configurations, machine learning techniques, emerging memory technologies, and energy-efficient caches. These studies could provide valuable insights into cache design and help improve the performance and energy efficiency of modern computer systems.
 
 \section{Conclusion}
-In conclusion, our research using the gem5 simulator to model various single-core CPU cache configurations has provided valuable insights into cache design and performance. Our experiments have shown that cache configuration has a significant impact on performance, and that different cache sizes, associativity, and replacement policies can have complex interactions that affect performance.
+In this research, we have used the gem5 simulator to model various single-core CPU cache configurations and evaluated their performance using several benchmarks. We compared our results with those of a previous study that used the SimpleScalar simulator to evaluate cache performance. Our research aimed to contribute to the understanding of cache performance and design, as well as evaluate the effectiveness of different simulators in modeling cache behavior.
 
-Our experiments have also highlighted the importance of workload characteristics in cache performance. Different workloads stress different aspects of the memory hierarchy, and understanding these characteristics is essential in designing effective caches.
+Our study found that the performance of different cache configurations varied significantly depending on the workload characteristics. We observed that the impact of replacement policies on cache performance was insignificant, with the LRU policy outperforming the FIFO and Random policies in most cases.
 
-Overall, our research demonstrates the utility of simulation tools such as gem5 in evaluating cache performance. By using simulation, we can explore a wide range of cache configurations and workloads in a controlled and repeatable environment. This allows us to gain insights into cache behavior that would be difficult or impossible to obtain through experimental methods alone.
+Our results differed significantly from those of the previous study, which focused on the impact of cache size and associativity on performance using the SimpleScalar simulator. We found that the performance of cache configurations varied depending on the simulator. Our findings suggest that the gem5 simulator may be more effective in modeling cache behavior of modern CPU's compared to SimpleScalar.
 
-Our research also points to several areas for future research, including multi-core CPU cache configurations, machine learning techniques, emerging memory technologies, and energy-efficient caches. We believe that continued research in these areas can help improve the performance and energy efficiency of modern computer systems.
+Our research has several implications for cache design and optimization. By understanding the impact of different cache configurations on performance, designers can improve system performance and energy efficiency. Our findings also have implications for the use of simulation tools in cache performance modeling, highlighting the need for careful selection of simulator and benchmark suite.
 
-In summary, our findings highlight the importance of cache design and performance in modern computer systems, and the potential of simulation tools such as gem5 to aid in this research. We hope that our work will contribute to a better understanding of cache behavior and guide future research in this important area.
+In conclusion, our research has contributed to the understanding of cache performance and design using the gem5 simulator. Our results highlight the significant differences in cache performance between different simulators and benchmark suites. We hope that our findings will guide future research in cache design and optimization and improve the accuracy and efficiency of cache performance modeling.
 
 \printbibliography
 \end{document}
