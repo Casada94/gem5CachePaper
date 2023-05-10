@@ -128,7 +128,41 @@ In summary, our experimental methodology involves using the gem5 simulator to ev
 
 \subsection{Rijndael Benchmark}
 
+MiBench provides an implementation of Rijndael. While modern desktop CPUs have instructions for Rijndael\cite{gueron2010intel}, they may not be implemented on embedded systems or on systems with small cache configurations. Figure \ref{fig:rijndael-cachesize} shows the miss rates on configurations with 16kB, 32kB, and 64kB of cache size and 1, 2, 4, and 8 associativity. The configuration with cache size of 16kB and an associativity of 1 shows the highest miss rate at 0.1529. It significantly improves if the cache size or the associativity changes. The miss rates with respect to cache size is monotonically decreasing. That is, a cache size of 16kB with associativity remaining the same will always perform worse than 32kB, and the same with 32kB compared to 64kB. Furthermore, miss rates with respect to associativity also monotonically decreases. The 2:1 cache rule of thumb applies for the configuration of 32kB cache size and 1 associativity compared to the 16kB cache size and 2 associativity, having miss rates 0.0424 and 0.0464, respectively. However, it quickly falls apart with configurations of 64kB cache size and 1 associativity and of 32kB cache size and 2 associativity, having miss rates 0.0353 and 0.0239. The gap continues to increase for larger configurations.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/rijndael_cachesize.png}
+    \caption{The miss rate on configurations with different set associativities and cache sizes. The miss rates on the D-cache are on a logarithmic scale to represent the large disparities in the miss rates. Smaller values are better.}
+    \label{fig:rijndael-cachesize}
+\end{figure}
+
+Figure \ref{fig:rijndael-blocksize} shows the miss rates on configurations with block size of either 32 or 64 and an associativity of 1, 2, 4, and 8. Unlike Figure \ref{fig:rijndael-cachesize}, the miss rates are not monotonically decreasing as the cache size or associativity increases. For an associativity of 1, the miss rates for a configuration with a block size of 32 slightly loses over a configuration of a block size of 64 (miss rates 0.0780 and 0.0758, respectively). This pattern does not hold for larger associativities. However, with the exception of an associativity of 1, the larger the associativity, the smaller the difference between the block sizes. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/rijndael_blocksize.png}
+  \caption{The D-cache miss rate on configurations with different set associativities and block sizes. Smaller values are better.}
+  \label{fig:rijndael-blocksize}
+\end{figure}
+
+This pattern is explored more in Figure \ref{fig:rijndael-missrate-percentchange}. Looking solely at the cache size, increasing block size on larger cache size often lowers miss rate. If we break down by associativity, an associativity of 1 always benefits from a larger block size, an associativity of 4 and 8 improve with larger cache sizes. The exception is a configuration with associativity of 2, as that will always benefit from a block size of 32.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/rijndael_missrate_percentchange.png}
+  \caption{The percent change of D-cache miss rate from configurations with 32 vs 64 block size. Only LRU replacement policy is shown, but the pattern remains the same with other replacement policies (although their extent differs). Smaller values are better.}
+  \label{fig:rijndael-missrate-percentchange}
+\end{figure}
+
+Expanding more on the 2:1 cache rule of thumb, Figure \ref{fig:rijndael-percentdifference} shows the percent difference of "cache rule of thumb" configurations. That is, the percent difference between a configuration with $n$ cache size and $x$ associativity and a configuration with $n/2$ cache size and $2x$ associativity. A value of zero indicates that the two values are the same. If many runs exhibit a percent difference close to zero, then the cache rule of thumb would hold for Rijndael benchmarks. However, 19 out of 35 runs exhibit a percent difference of greater than 50\%, indicating a significant deviation from the supposed 2:1 cache rule of thumb.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/rijndael_percentdifference.png}
+  \caption{The percent difference of D-cache miss rates of cache rule of thumb configurations. Values closer to 0 are better.}
+  \label{fig:rijndael-percentdifference}
+\end{figure}
 
 \section{Discussion}
 
