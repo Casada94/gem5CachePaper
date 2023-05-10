@@ -48,49 +48,43 @@
 %     \label{fig:EmpC1-Training}
 % \end{figure}
 
-\begin{table}
-    \centering
-    \begin{tabular}{| m{1.6cm} | m{.75cm} | m{.75cm} | m{.8cm} | m{2.6cm} |}
-        \hline
-        \textbf{Benchmarks} & \textbf{Cache Size} & \textbf{Block Size}& \textbf{Set Assoc.}& \textbf{Replacement Policy} \\ \hline
-        Dijkstra    &   16kB  &   32    &  1   &    Least Recently Used     \\ \hline
-        Sha         &   32kB  &   64    &  2   &    Random                  \\ \hline
-        Rijndael    &   64kB  &         &  4   &    First In First Out      \\ \hline
-                    &         &         &  8   &                            \\ \hline
-    \end{tabular}
-\end{table}
-
 \section{Introduction}
-Cache performance is a critical factor in the overall performance of modern computer systems. Cache design involves balancing the trade-offs between cache size, associativity, and replacement policies to achieve optimal performance for a given workload. Simulation tools such as gem5 and SimpleScalar provide powerful means for evaluating cache performance, allowing researchers to explore a wide range of cache configurations and workloads in a controlled environment.
 
-In this paper, we present a study of cache performance using the gem5 simulator to model various single-core CPU cache configurations. Our aim is to compare the results of our study with the results of a previous study that used the SimpleScalar simulator. The previous study focused on the impact of cache size, block size, and associativity on miss rate performance, while our study explores the impact of replacement policies in addition to cache size, block size, and associativity.
+Cache performance is critical to the performance and efficiency of modern computer systems. As processors have become increasingly fast, the memory and storage hierarchy have struggled to keep up, leading to a performance gap between processors and memory systems. Caches are small, fast memories that sit between the processor and main memory to help bridge this performance gap and supply the processor with data and instructions quickly\cite{hennessy_computer_2012}.
 
-Our research uses three benchmarks to evaluate cache performance, from SPEC95 benchmarks to stress different aspects of the memory hierarchy. We compare our results with those of the previous study, which used a total of 5 benchmarks from SPEC95 benchmarks designed to stress the instruction cache and data cache separately. The shared benchmarks were Dijkstra, Sha, and Rijndael. The additonal benchmarks from the previous study are Go and Compress.
+The design of caches involves navigating multiple trade-offs between cache size, associativity, block size, and replacement policies in order to achieve optimal performance for a given workload. Larger cache sizes can store more data, reducing the number of slow accesses to main memory, but have other trade-offs such as having higher access latencies and consuming more power. Associativity refers to the number of locations in the cache that can store a given memory block. Higher associativity reduces conflict misses that occur when two memory blocks map to the same cache location, exchanging for additional hardware cost. Block size determines how much data is brought into the cache at once on a cache miss. Larger block sizes can improve spatial locality and reduce miss rates, but they also bring in more unused data, wasting cache space. Replacement policies determine which cache line is evicted when the cache is full and a new memory block needs to be brought in. More effective replacement policies can improve cache miss rate by reducing the number of useful cache lines evicted\cite{hennessy_computer_2012}.
 
-The use of different simulators and benchmarks provides an opportunity to compare and contrast the results of our study with those of the previous study. It also allows us to evaluate the effectiveness of gem5 in modeling cache performance compared to SimpleScalar. Our study provides insights into the impact of replacement policies on cache performance, which was not explored in the previous study.
+Simulation tools, like gem5\cite{10.1145/2024716.2024718} and SimpleScalar\cite{10.1145/268806.268810}, are useful for exploring the cache design space and evaluating trade-offs. These tools run simulated workloads and collect various cache metrics across different configurations. This allows designers to find the optimal balance of size, associativity, block size, and replacement policy for a target workload without having to build physical hardware prototypes.
 
-In conclusion, our research aims to contribute to the understanding of cache performance and design using simulation tools. By comparing the results of our study with those of the previous study, we hope to provide a comprehensive picture of cache performance across different simulators and benchmarks. We also hope to demonstrate the effectiveness of gem5 in modeling cache performance and guide future research in this important area.
-
-\section{Motivation}
-The design and optimization of cache performance is critical to the overall performance of modern computer systems. Cache performance can significantly impact system performance and energy efficiency, especially in memory-intensive workloads. Therefore, understanding the trade-offs between cache size, associativity, and replacement policies is crucial in designing effective caches.
-
-Simulation tools such as gem5 and SimpleScalar provide powerful means for evaluating cache performance. However, there is a need to evaluate and compare the effectiveness of these simulators in modeling cache performance. Additionally, there is a need to explore the impact of replacement policies on cache performance, which was not studied in the previous research did not cover.
-
-Our research aims to contribute to the understanding of cache performance and design by using the gem5 simulator to model various single-core CPU cache configurations. We aim to evaluate the effectiveness of gem5 in modeling cache performance compared to SimpleScalar, which was used in a previous study. We also aim to explore the impact of replacement policies on cache performance in addition to cache size and associativity. By comparing the results of our study with those of the previous study, we hope to provide a comprehensive picture of cache performance across different simulators and identify any differences in their respective results.
-
-Our research has the potential to inform cache design and optimization, as well as guide future research in this area. By understanding the impact of cache size, associativity, and replacement policies on performance, we can design more effective caches that improve system performance and energy efficiency. Furthermore, by evaluating the effectiveness of simulation tools such as gem5 and SimpleScalar, we can improve the accuracy and efficiency of cache performance modeling.
+In this paper, we show optimizations of cache miss rates through navigation of these trade-offs. We compare the miss rates on a total of 72 configurations per benchmark by varying cache size, associativity, block size, and replacement policies. Other cache parameters have remained constant. We use three benchmarks from the MiBench benchmark suite, designed for embedded processors. As such, the cache size, block size, and set associativity all match appropriate configurations for embedded processors.
 
 \section{Related Work}
 
-The importance of cache performance in modern computer systems has been widely recognized in the computer architecture research community. As a result, cache design has been extensively studied and optimized to improve system performance. Research studies have explored configurations of cache designs through simulation for decades.
+As cache performance is crucial for modern computer systems, computer architecture researchers community has recognized its significance. As a result, cache design has been extensively studied and optimized to improve system performance, with researchers exploring various cache configurations through simulation over decades.
 
-For example, many researchers explored the trade-offs between cache replacement policies. Al-Zoubi et. al.\cite{10.1145/986537.986601} explored cache replacement policies on the CPU2000 benchmark suite using SimpleScalar in 2004. They found that LRU and LRU-based specifically, pseudo-LRU replacement policies performed best. Panda et. al.\cite{7806218} shows modern LRU-based replacement policies outperforming pseudo-LRU using SimpleScalar, this time using the CPU2006 benchmarks.
+For instance, researchers have explored trade-offs between cache replacement policies. In 2004, Al-Zoubi et. al.\cite{10.1145/986537.986601} evaluated cache replacement policies on the CPU2000 benchmark suite using SimpleScalar and found that LRU and LRU-based policies, specifically pseudo-LRU replacement policies, performed best. More recent studies by Panda et. al.\cite{7806218} shows that modern LRU-based replacement policies outperforming pseudo-LRU using the CPU2006 benchmarks.
 
-The capacity of the cache has been explored in Ma et. al.\cite{5260945}. Like other researchers, they use SimpleScalar to determine miss rates across multiple benchmarks in SPEC2000. They noticed that a larger L1 cache size improves significantly when the cache size is small, but gradually decreases as the cache gets bigger. Ullah et. al.\cite{8975563} expands on this by creating a 2:1 cache rule of thumb, where they claim that the miss rates of $n$ cache size and $x$ associativity is equivalent to the miss rates on a configuration with $n/2$ cache size and $2x$ associativity.
+Cache size has also been extensively studied. Ma et. al.\cite{5260945} used SimpleScalar to evaluate miss rates across multiple benchmarks in SPEC2000 and found that a larger L1 cache size significantly improves performance when the cache size is small, but gradually decreases as the cache gets bigger. Ullah et. al.\cite{8975563} built on this work by proposing a 2:1 cache rule of thumb, which states that the miss rates of a cache with $n$ cache size and $x$ associativity are equivalent to the miss rates on a configuration with $n/2$ cache size and $2x$ associativity.
 
-% TODO: Determine whether the below is best fit in Related Work or in some other section
+While most research on cache configurations and miss rates have been done in SimpleScalar, some research has used gem5. Reas et. al.\cite{10.1109/UKSIM.2010.35} have simulated L2 cache miss rates on m5 (the precursor to gem5) and compared them to miss rates on hardware implementations of their design on the SPLASH-2 benchmark suite.
 
-Many simulations of miss rates for various processor configurations use SimpleScalar\cite{10.1145/268806.268810} as their simulator of choice. Original versions of SimpleScalar used its own instruction set architecture derived from MIPS-IV ISA\cite{10.1145/268806.268810} and may not necessarily model real-world processors accurately. While there has been significant research on porting SimpleScalar to different architectures, such as PowerPC, x86, and ARM\cite{10.1145/986537.986601} (with ARM being verified as cycle-accurate\cite{CHUNG2006137}), most research papers on simulating miss rates do not specify the environment or instruction set architecture it was ran on.
+\section{Motivation}
+
+As stated before, cache performance is a critical factor for any computer system as it plays a significant role in improving system performance and energy efficiency, particularly in memory-intensive workloads. This becomes a greater issue for embedded processors, where speed and energy efficiency have high priority. Therefore, understanding the trade-offs between cache size, associativity, block size, and replacement policies is crucial in the optimization process for processor design.
+
+Furthermore, many simulations of miss rates for various processor configurations use SimpleScalar\cite{10.1145/268806.268810} as their simulator of choice. Original versions of SimpleScalar used its own instruction set architecture derived from MIPS-IV ISA\cite{10.1145/268806.268810} and may not necessarily model real-world processors accurately. While there has been significant research on porting SimpleScalar to different architectures, such as PowerPC, x86, and ARM\cite{10.1145/986537.986601} (with ARM being verified as cycle-accurate\cite{CHUNG2006137}), most research papers on simulating miss rates do not specify the version of SimpleScalar used, the computing environment used, or the instruction set architecture it was ran on.
+
+Therefore, we have developed key questions that our paper hopes to answer:
+
+\begin{enumerate}
+  \item What is the best configuration for embedded processors on the selected benchmarks?
+  \item Does the 2:1 cache rule of thumb hold for the selected benchmarks?
+  \item How does gem5 and SimpleScalar differ on simulated cache miss rates?
+\end{enumerate}
+
+Our research aims to contribute to the understanding of cache performance and design by using the gem5 simulator to model various single-core CPU cache configurations. To evaluate the effectiveness of gem5 in modeling cache performance compared to SimpleScalar, we base our configurations on configurations used in Ullah et. al.. In addition, we also aim to explore the impact of replacement policies on cache performance. By comparing the results of our study with those of Ullah et. al., we hope to provide a comprehensive picture of cache performance across different simulators and identify any differences in their respective results.
+
+Our research has the potential to inform cache design and optimization, as well as guide future research in this area. By understanding the impact of cache size, associativity, block size, and replacement policies on performance, we can design more effective caches that improve system performance and energy efficiency. Furthermore, by evaluating the effectiveness of simulation tools such as gem5 and SimpleScalar, we can improve the accuracy and efficiency of cache performance modeling.
 
 \section{Research methodology}
 In this research, we use the gem5 simulator to model various single-core CPU cache configurations and evaluate their performance under different workloads. We describe the experimental methodology below.
@@ -105,6 +99,22 @@ Cache Configurations:
 We evaluate several cache configurations with different sizes, different block sized, associativity, and replacement policies. As seen in the cache sizes configurations used were 16kB, 32kB, and 64kB. Cache block sizes were configuratble to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. The additional configuration used in this study beyond what the original tested are following replacement policies, least recently used, random replacement, and first in first out replacement policy.
 
 We use the findings of the previous research paper as a baseline for comparison of each unique combination of configurations.
+
+Table \ref{table:configurations} shows the various configurations tested. The three benchmarks come from the MiBench benchmark suite, designed for embedded processors\cite{990739}. Least Recently Used (LRU), Random, and First-In First-Out (FIFO) are common replacement policies. While there are other replacement policies that may be better, 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{| m{1.6cm} | m{.75cm} | m{.75cm} | m{.8cm} | m{2.6cm} |}
+      \hline
+      \textbf{Benchmarks} & \textbf{Cache Size} & \textbf{Block Size}& \textbf{Set Assoc.}& \textbf{Replacement Policy} \\ \hline
+      Dijkstra    &   16kB  &   32    &  1   &    Least Recently Used     \\ \hline
+      Sha         &   32kB  &   64    &  2   &    Random                  \\ \hline
+      Rijndael    &   64kB  &         &  4   &    First-In First-Out      \\ \hline
+                  &         &         &  8   &                            \\ \hline
+  \end{tabular}
+  \caption{The different configurations tested.}
+  \label{table:configurations}
+\end{table}
 
 Simulation Setup:
 We use gem5's full-system mode to simulate our experiments. In this mode, the entire system, including the CPU, cache, and memory hierarchy, is simulated. We run each workload multiple times to ensure the stability of the results and use a warm-up period to ensure that the cache is populated before we start collecting performance data.
