@@ -1,0 +1,314 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{10.1145/986537.986601}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=4751be4416821857481963396fbce759}{%
+           family={Al-Zoubi},
+           familyi={A\bibinithyphendelim Z\bibinitperiod},
+           given={Hussein},
+           giveni={H\bibinitperiod}}}%
+        {{hash=9fcaaa44b137786c3f18556b968af5d5}{%
+           family={Milenkovic},
+           familyi={M\bibinitperiod},
+           given={Aleksandar},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cc1db9017949e52687afe1581a719b67}{%
+           family={Milenkovic},
+           familyi={M\bibinitperiod},
+           given={Milena},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Huntsville, Alabama}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{a95ff520c280d8713f9950287a72a803}
+      \strng{fullhash}{a95ff520c280d8713f9950287a72a803}
+      \strng{bibnamehash}{a95ff520c280d8713f9950287a72a803}
+      \strng{authorbibnamehash}{a95ff520c280d8713f9950287a72a803}
+      \strng{authornamehash}{a95ff520c280d8713f9950287a72a803}
+      \strng{authorfullhash}{a95ff520c280d8713f9950287a72a803}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 42nd Annual Southeast Regional Conference}
+      \field{isbn}{1581138709}
+      \field{series}{ACM-SE 42}
+      \field{title}{Performance Evaluation of Cache Replacement Policies for the SPEC CPU2000 Benchmark Suite}
+      \field{year}{2004}
+      \field{pages}{267\bibrangedash 272}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1145/986537.986601
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/986537.986601
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/986537.986601
+      \endverb
+      \keyw{replacement policy,cache memory,performance evaluation}
+    \endentry
+    \entry{7806218}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=9d4b476804859931c8771d5754684465}{%
+           family={Panda},
+           familyi={P\bibinitperiod},
+           given={Parag},
+           giveni={P\bibinitperiod}}}%
+        {{hash=d56e72fc62e8c73ac30bdcf1541584a8}{%
+           family={Patil},
+           familyi={P\bibinitperiod},
+           given={Geeta},
+           giveni={G\bibinitperiod}}}%
+        {{hash=f331e9589a904fb9aa756a62d4b195e6}{%
+           family={Raveendran},
+           familyi={R\bibinitperiod},
+           given={Biju},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{dabbd783c0cec9c00d1302a596d4a919}
+      \strng{fullhash}{dabbd783c0cec9c00d1302a596d4a919}
+      \strng{bibnamehash}{dabbd783c0cec9c00d1302a596d4a919}
+      \strng{authorbibnamehash}{dabbd783c0cec9c00d1302a596d4a919}
+      \strng{authornamehash}{dabbd783c0cec9c00d1302a596d4a919}
+      \strng{authorfullhash}{dabbd783c0cec9c00d1302a596d4a919}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 IEEE Distributed Computing, VLSI, Electrical Circuits and Robotics (DISCOVER)}
+      \field{title}{A survey on replacement strategies in cache memory for embedded systems}
+      \field{year}{2016}
+      \field{pages}{12\bibrangedash 17}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/DISCOVER.2016.7806218
+      \endverb
+    \endentry
+    \entry{5260945}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=e04ded59ce285238c6f29086615b3e31}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Hai-feng},
+           giveni={H\bibinithyphendelim f\bibinitperiod}}}%
+        {{hash=7186378bba84abcb8d5331739a7b3038}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Nian-min},
+           giveni={N\bibinithyphendelim m\bibinitperiod}}}%
+        {{hash=34707d1e8b17df84d8a3ddfdde193b62}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Hong-bo},
+           giveni={H\bibinithyphendelim b\bibinitperiod}}}%
+      }
+      \strng{namehash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \strng{fullhash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \strng{bibnamehash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \strng{authorbibnamehash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \strng{authornamehash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \strng{authorfullhash}{148b8cbab7988be9dd9fff5cc94ea732}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2009 International Conference on New Trends in Information and Service Science}
+      \field{title}{Cache Performance Simulation and Analysis under SimpleScalar Platform}
+      \field{year}{2009}
+      \field{pages}{607\bibrangedash 612}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/NISS.2009.61
+      \endverb
+    \endentry
+    \entry{8975563}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=021b781b03ae0e2c7fa46321b518b53a}{%
+           family={Ullah},
+           familyi={U\bibinitperiod},
+           given={Zahid},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=2fd3520ae2988ce4e3bbba4be886fe44}{%
+           family={Minallah},
+           familyi={M\bibinitperiod},
+           given={Nasru},
+           giveni={N\bibinitperiod}}}%
+        {{hash=27787141be80fdf21a26fd833f5d5904}{%
+           family={Marwat},
+           familyi={M\bibinitperiod},
+           given={Safdar\bibnamedelimb Nawaz\bibnamedelima Khan},
+           giveni={S\bibinitperiod\bibinitdelim N\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=9f4d45b866c1ae0032e081a5b9081e72}{%
+           family={Hafeez},
+           familyi={H\bibinitperiod},
+           given={Abdul},
+           giveni={A\bibinitperiod}}}%
+        {{hash=50265484e3398e21bffe53291988751c}{%
+           family={Fouzder},
+           familyi={F\bibinitperiod},
+           given={Tama},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{09843d074f0e8120d1143e8d2071e56f}
+      \strng{fullhash}{a1e9c63f8386eef3acd45182f57b1c7a}
+      \strng{bibnamehash}{a1e9c63f8386eef3acd45182f57b1c7a}
+      \strng{authorbibnamehash}{a1e9c63f8386eef3acd45182f57b1c7a}
+      \strng{authornamehash}{09843d074f0e8120d1143e8d2071e56f}
+      \strng{authorfullhash}{a1e9c63f8386eef3acd45182f57b1c7a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2019 5th International Conference on Advances in Electrical Engineering (ICAEE)}
+      \field{title}{Performance Analysis of Cache Size and Set-Associativity using simpleScalar Benchmark}
+      \field{year}{2019}
+      \field{pages}{440\bibrangedash 447}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICAEE48663.2019.8975563
+      \endverb
+    \endentry
+    \entry{10.1145/268806.268810}{article}{}
+      \name{author}{2}{}{%
+        {{hash=aa76ebd83aa8c795c67769c23f359cdb}{%
+           family={Burger},
+           familyi={B\bibinitperiod},
+           given={Doug},
+           giveni={D\bibinitperiod}}}%
+        {{hash=427034667d4ece90fa20604e77c61cee}{%
+           family={Austin},
+           familyi={A\bibinitperiod},
+           given={Todd\bibnamedelima M.},
+           giveni={T\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{8f25292a2cd4f49a58e705506f8c0508}
+      \strng{fullhash}{8f25292a2cd4f49a58e705506f8c0508}
+      \strng{bibnamehash}{8f25292a2cd4f49a58e705506f8c0508}
+      \strng{authorbibnamehash}{8f25292a2cd4f49a58e705506f8c0508}
+      \strng{authornamehash}{8f25292a2cd4f49a58e705506f8c0508}
+      \strng{authorfullhash}{8f25292a2cd4f49a58e705506f8c0508}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This document describes release 2.0 of the SimpleScalar tool set, a suite of free, publicly available simulation tools that offer both detailed and high-performance simulation of modern microprocessors. The new release offers more tools and capabilities, precompiled binaries, cleaner interfaces, better documentation, easier installation, improved portability, and higher performance. This paper contains a complete description of the tool set, including retrieval and installation instructions, a description of how to use the tools, a description of the target SimpleScalar architecture, and many details about the internals of the tools and how to customize them. With this guide, the tool set can be brought up and generating results in under an hour (on supported platforms).}
+      \field{issn}{0163-5964}
+      \field{journaltitle}{SIGARCH Comput. Archit. News}
+      \field{month}{6}
+      \field{number}{3}
+      \field{title}{The SimpleScalar Tool Set, Version 2.0}
+      \field{volume}{25}
+      \field{year}{1997}
+      \field{pages}{13\bibrangedash 25}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1145/268806.268810
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/268806.268810
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/268806.268810
+      \endverb
+    \endentry
+    \entry{CHUNG2006137}{article}{}
+      \name{author}{7}{}{%
+        {{hash=1beb865251db705356bbac2a7874038e}{%
+           family={Chung},
+           familyi={C\bibinitperiod},
+           given={Sung\bibnamedelima Woo},
+           giveni={S\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=0fc6d3c6329cc35abdd0e5c75a91c8b3}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Gi\bibnamedelima Ho},
+           giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=24fa759f815f18c6377a84fd33b5056d}{%
+           family={Suh},
+           familyi={S\bibinitperiod},
+           given={Hyo-Joong},
+           giveni={H\bibinithyphendelim J\bibinitperiod}}}%
+        {{hash=80fbb99d7cd8968f19aa48add56dc7d8}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Han\bibnamedelima Jong},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=f821232e3758ba5d04a45caff831abcd}{%
+           family={Im},
+           familyi={I\bibinitperiod},
+           given={Jung\bibnamedelima Bin},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=ead6799c24c8ba7e41b6b05515eda16d}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Jung\bibnamedelima Wook},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=f8fac163e47871b2ba284f5c09fa345e}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Sung\bibnamedelima Bae},
+           giveni={S\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{11556438ea54f14ec422ecedd4ee2725}
+      \strng{fullhash}{0775ebc3eb63869cf2cdc1baab0371b7}
+      \strng{bibnamehash}{11556438ea54f14ec422ecedd4ee2725}
+      \strng{authorbibnamehash}{11556438ea54f14ec422ecedd4ee2725}
+      \strng{authornamehash}{11556438ea54f14ec422ecedd4ee2725}
+      \strng{authorfullhash}{0775ebc3eb63869cf2cdc1baab0371b7}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0141-9331}
+      \field{journaltitle}{Microprocessors and Microsystems}
+      \field{number}{3}
+      \field{title}{Sim-ARM1136: A case study on the accuracy of the cycle-accurate simulator}
+      \field{volume}{30}
+      \field{year}{2006}
+      \field{pages}{137\bibrangedash 144}
+      \range{pages}{8}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.micpro.2005.07.002
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0141933105000633
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0141933105000633
+      \endverb
+      \keyw{Microprocessor,Cycle accurate simulator,Performance evaluation,ARM processor}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
