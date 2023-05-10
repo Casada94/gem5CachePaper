@@ -1,4 +1,3 @@
-% !TEX root = C:\Users\clayton\Desktop\gem5CachePaper\gem5CachePaper.tex
 \documentclass[conference]{IEEEtran}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{epstopdf}
@@ -6,7 +5,7 @@
 \usepackage{verbatim}
 \usepackage{array}
 \usepackage{authblk}
-\usepackage{IEEEtrantools}
+% \usepackage{IEEEtrantools}
 \usepackage[
     backend=biber,
     style=ieee,
@@ -42,12 +41,12 @@
 \end{abstract}
 
 % THIS IS LEFT HERE AS AN EXAMPLE/TEMPLATE FOR INCLUDING PICTURES
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\textwidth]{images/EmpC1-Training}
-    \caption{Amount of training provided}
-    \label{fig:EmpC1-Training}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.45\textwidth]{images/EmpC1-Training}
+%     \caption{Amount of training provided}
+%     \label{fig:EmpC1-Training}
+% \end{figure}
 
 \begin{table}
     \centering
@@ -83,7 +82,15 @@ Our research has the potential to inform cache design and optimization, as well 
 
 \section{Related Work}
 
-% WE REALLY NEED SOME RELATED WORKS GOING INTO HERE
+The importance of cache performance in modern computer systems has been widely recognized in the computer architecture research community. As a result, cache design has been extensively studied and optimized to improve system performance. Research studies have explored configurations of cache designs through simulation for decades.
+
+For example, many researchers explored the trade-offs between cache replacement policies. Al-Zoubi et. al.\cite{10.1145/986537.986601} explored cache replacement policies on the CPU2000 benchmark suite using SimpleScalar in 2004. They found that LRU and LRU-based specifically, pseudo-LRU replacement policies performed best. Panda et. al.\cite{7806218} shows modern LRU-based replacement policies outperforming pseudo-LRU using SimpleScalar, this time using the CPU2006 benchmarks.
+
+The capacity of the cache has been explored in Ma et. al.\cite{5260945}. Like other researchers, they use SimpleScalar to determine miss rates across multiple benchmarks in SPEC2000. They noticed that a larger L1 cache size improves significantly when the cache size is small, but gradually decreases as the cache gets bigger. Ullah et. al.\cite{8975563} expands on this by creating a 2:1 cache rule of thumb, where they claim that the miss rates of $n$ cache size and $x$ associativity is equivalent to the miss rates on a configuration with $n/2$ cache size and $2x$ associativity.
+
+% TODO: Determine whether the below is best fit in Related Work or in some other section
+
+Many simulations of miss rates for various processor configurations use SimpleScalar\cite{10.1145/268806.268810} as their simulator of choice. Original versions of SimpleScalar used its own instruction set architecture derived from MIPS-IV ISA\cite{10.1145/268806.268810} and may not necessarily model real-world processors accurately. While there has been significant research on porting SimpleScalar to different architectures, such as PowerPC, x86, and ARM\cite{10.1145/986537.986601} (with ARM being verified as cycle-accurate\cite{CHUNG2006137}), most research papers on simulating miss rates do not specify the environment or instruction set architecture it was ran on.
 
 \section{Research methodology}
 In this research, we use the gem5 simulator to model various single-core CPU cache configurations and evaluate their performance under different workloads. We describe the experimental methodology below.
