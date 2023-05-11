@@ -522,31 +522,6 @@
       \endverb
       \keyw{Microprocessor,Cycle accurate simulator,Performance evaluation,ARM processor}
     \endentry
-    \entry{gueron2010intel}{article}{}
-      \name{author}{1}{}{%
-        {{hash=74ca2f05d1125811a4211361255b1cf2}{%
-           family={Gueron},
-           familyi={G\bibinitperiod},
-           given={Shay},
-           giveni={S\bibinitperiod}}}%
-      }
-      \strng{namehash}{74ca2f05d1125811a4211361255b1cf2}
-      \strng{fullhash}{74ca2f05d1125811a4211361255b1cf2}
-      \strng{bibnamehash}{74ca2f05d1125811a4211361255b1cf2}
-      \strng{authorbibnamehash}{74ca2f05d1125811a4211361255b1cf2}
-      \strng{authornamehash}{74ca2f05d1125811a4211361255b1cf2}
-      \strng{authorfullhash}{74ca2f05d1125811a4211361255b1cf2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Intel White Paper, Rev}
-      \field{title}{Intel advanced encryption standard (AES) instructions set}
-      \field{volume}{3}
-      \field{year}{2010}
-      \field{pages}{1\bibrangedash 94}
-      \range{pages}{94}
-    \endentry
   \enddatalist
   \missing{990739}
 \endrefsection

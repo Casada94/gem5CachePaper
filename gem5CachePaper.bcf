@@ -2379,7 +2379,6 @@
     <bcf:citekey order="12" intorder="1">10.1145/986537.986601</bcf:citekey>
     <bcf:citekey order="13" intorder="1">CHUNG2006137</bcf:citekey>
     <bcf:citekey order="14" intorder="1">990739</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">gueron2010intel</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

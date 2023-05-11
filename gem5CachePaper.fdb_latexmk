@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber gem5CachePaper"] 0 "gem5CachePaper.bcf" "gem5CachePaper.bbl" "gem5CachePaper" 1683767440 -1
+["biber gem5CachePaper"] 1683778426 "gem5CachePaper.bcf" "gem5CachePaper.bbl" "gem5CachePaper" 1683778451 0
   "./additional.bib" 1683766829 8755 1f18f0ae3dea0e87352eb4de489c0ac9 ""
-  "gem5CachePaper.bcf" 1683767436 108228 d3cc0b0b9d7e68308ba25783f62cf2de "pdflatex"
+  "gem5CachePaper.bcf" 1683778449 108157 1dcfcff38ea66ad22e03a8d4ec1b5b89 "pdflatex"
   (generated)
   "gem5CachePaper.bbl"
   "gem5CachePaper.blg"
   (rewritten before read)
-["pdflatex"] 1683767424 "c:/Users/hp/Documents/MscCSULB/SEM1/CECS530-AdvanceComputerArchiecture/gem5CachePaper/gem5CachePaper.tex" "gem5CachePaper.pdf" "gem5CachePaper" 1683767440 0
-  "c:/Users/hp/Documents/MscCSULB/SEM1/CECS530-AdvanceComputerArchiecture/gem5CachePaper/gem5CachePaper.tex" 1683767404 39878 1c479182ea5ac8c6b20f0bae82525564 ""
+["pdflatex"] 1683778441 "c:/Users/hp/Documents/MscCSULB/SEM1/CECS530-AdvanceComputerArchiecture/gem5CachePaper/gem5CachePaper.tex" "gem5CachePaper.pdf" "gem5CachePaper" 1683778451 0
+  "c:/Users/hp/Documents/MscCSULB/SEM1/CECS530-AdvanceComputerArchiecture/gem5CachePaper/gem5CachePaper.tex" 1683778423 30083 de9086eda40d364f820af4ecbfc1aff4 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1683071997 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1683072733 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1683078468 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -116,21 +116,14 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1683079542 4683147 c40e3a1ac4f9bf67fe64e54fe7cecde0 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1683079879 7887266 9229918001bbe7c108325615869079d2 ""
   "c:/texlive/2023/texmf.cnf" 1683079487 713 e69b156964470283e0530f5060668171 ""
-  "dijkstraFigures/CacheMissRatevsBlockSize.png" 1683766829 18248 49d12e684bc99436e2e035d928ceae5b ""
-  "dijkstraFigures/CacheMissRatevsReplacementPolicies.png" 1683766829 21837 7f1199d3ddd934a3459e2510cf3fad0c ""
-  "dijkstraFigures/CacheMissRatevsSetAssociativity.png" 1683766829 19820 ebd517476d137bedd218476f23fd577b ""
-  "dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png" 1683766829 20046 bacfeadfd04870b6b8f8e06f01f8a293 ""
-  "gem5CachePaper.aux" 1683767436 6544 d0e1f4bf44c660f79741dc4cc0d816c9 "pdflatex"
-  "gem5CachePaper.bbl" 1683766972 25393 dc45b51ee88f8aa6b0ba4b36976ef43e "biber gem5CachePaper"
-  "gem5CachePaper.run.xml" 1683767436 2472 f4ab7821ab904010df7cc7e88cdb2234 "pdflatex"
-  "gem5CachePaper.tex" 1683767404 39878 1c479182ea5ac8c6b20f0bae82525564 ""
-  "images/rijndael_blocksize.png" 1683766829 16450 7dcaf2e81e06e1640849be7d41cbd26b ""
-  "images/rijndael_cachesize.png" 1683766829 19839 479e18315b36b24b37f4afe94bc9a65e ""
-  "images/rijndael_missrate_percentchange.png" 1683766829 20503 54e8eae3721bd93b754e9419f5c48e65 ""
-  "images/rijndael_percentdifference.png" 1683766829 34320 a8608714d7ec6f6841d84d3790f5c1c3 ""
+  "gem5CachePaper.aux" 1683778449 4524 c4ed20ddb8450dd219fde22d14f73d3a "pdflatex"
+  "gem5CachePaper.bbl" 1683778432 24328 a58884c4d738f4ebf577c2c174509b0c "biber gem5CachePaper"
+  "gem5CachePaper.run.xml" 1683778449 2472 f4ab7821ab904010df7cc7e88cdb2234 "pdflatex"
+  "gem5CachePaper.tex" 1683778423 30083 de9086eda40d364f820af4ecbfc1aff4 ""
   "sha/sha_avg_cachesize.png" 1683765712 23354 55d2ebf15e62419b3125e65d76ddf828 ""
-  "sha/sha_cache_vs_repl.png" 1683765712 25188 a9f6f8e26eb2c5b154f10c6229e6b2f5 ""
-  "sha/sha_cache_vs_setAssoc.png" 1683765712 40454 3b3e42e7defefce4a943371cc0380876 ""
+  "sha/sha_cache_vs_repl8.png" 1683775926 30546 fcb749fa9334d71cf9f48f7533018dde ""
+  "sha/sha_cache_vs_setAssocBL32.png" 1683776039 26701 341e35af9ffde9565bedbbb5b558483c ""
+  "sha/sha_cache_vs_setAssocBL64.png" 1683776091 35662 6db98d28628ea8dd364d77065a2c2087 ""
   (generated)
   "gem5CachePaper.aux"
   "gem5CachePaper.bcf"

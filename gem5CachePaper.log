@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.2)  10 MAY 2023 18:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.2)  10 MAY 2023 21:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -643,93 +643,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--109
  []
 
 [2]
-<sha/sha_avg_cachesize.png, id=18, 346.29375pt x 214.401pt>
+<sha/sha_cache_vs_setAssocBL32.png, id=18, 456.5055pt x 283.0575pt>
+File: sha/sha_cache_vs_setAssocBL32.png Graphic file (type png)
+<use sha/sha_cache_vs_setAssocBL32.png>
+Package pdftex.def Info: sha/sha_cache_vs_setAssocBL32.png  used on input line 137.
+(pdftex.def)             Requested size: 232.19843pt x 143.973pt.
+<sha/sha_cache_vs_setAssocBL64.png, id=20, 457.10776pt x 283.65974pt>
+File: sha/sha_cache_vs_setAssocBL64.png Graphic file (type png)
+<use sha/sha_cache_vs_setAssocBL64.png>
+Package pdftex.def Info: sha/sha_cache_vs_setAssocBL64.png  used on input line 146.
+(pdftex.def)             Requested size: 232.19843pt x 144.09322pt.
+<sha/sha_cache_vs_repl8.png, id=21, 456.5055pt x 284.262pt>
+File: sha/sha_cache_vs_repl8.png Graphic file (type png)
+<use sha/sha_cache_vs_repl8.png>
+Package pdftex.def Info: sha/sha_cache_vs_repl8.png  used on input line 156.
+(pdftex.def)             Requested size: 232.19843pt x 144.58565pt.
+<sha/sha_avg_cachesize.png, id=22, 346.29375pt x 214.401pt>
 File: sha/sha_avg_cachesize.png Graphic file (type png)
 <use sha/sha_avg_cachesize.png>
-Package pdftex.def Info: sha/sha_avg_cachesize.png  used on input line 137.
+Package pdftex.def Info: sha/sha_avg_cachesize.png  used on input line 171.
 (pdftex.def)             Requested size: 232.19843pt x 143.76569pt.
-<sha/sha_cache_vs_repl.png, id=20, 457.10776pt x 284.86424pt>
-File: sha/sha_cache_vs_repl.png Graphic file (type png)
-<use sha/sha_cache_vs_repl.png>
-Package pdftex.def Info: sha/sha_cache_vs_repl.png  used on input line 148.
-(pdftex.def)             Requested size: 232.19843pt x 144.70508pt.
-<sha/sha_cache_vs_setAssoc.png, id=21, 457.10776pt x 286.671pt>
-File: sha/sha_cache_vs_setAssoc.png Graphic file (type png)
-<use sha/sha_cache_vs_setAssoc.png>
-Package pdftex.def Info: sha/sha_cache_vs_setAssoc.png  used on input line 160.
-(pdftex.def)             Requested size: 232.19843pt x 145.62286pt.
- [3 <./sha/sha_avg_cachesize.png> <./sha/sha_cache_vs_repl.png> <./sha/sha_cache_vs_setAssoc.png>]
-<dijkstraFigures/CacheMissRatevsBlockSize.png, id=28, 602.25pt x 372.39125pt>
-File: dijkstraFigures/CacheMissRatevsBlockSize.png Graphic file (type png)
-<use dijkstraFigures/CacheMissRatevsBlockSize.png>
-Package pdftex.def Info: dijkstraFigures/CacheMissRatevsBlockSize.png  used on input line 181.
-(pdftex.def)             Requested size: 232.19843pt x 143.57846pt.
-<dijkstraFigures/CacheMissRatevsSetAssociativity.png, id=29, 602.25pt x 372.39125pt>
-File: dijkstraFigures/CacheMissRatevsSetAssociativity.png Graphic file (type png)
-<use dijkstraFigures/CacheMissRatevsSetAssociativity.png>
-Package pdftex.def Info: dijkstraFigures/CacheMissRatevsSetAssociativity.png  used on input line 194.
-(pdftex.def)             Requested size: 232.19843pt x 143.57846pt.
-<dijkstraFigures/CacheMissRatevsReplacementPolicies.png, id=30, 602.25pt x 372.39125pt>
-File: dijkstraFigures/CacheMissRatevsReplacementPolicies.png Graphic file (type png)
-<use dijkstraFigures/CacheMissRatevsReplacementPolicies.png>
-Package pdftex.def Info: dijkstraFigures/CacheMissRatevsReplacementPolicies.png  used on input line 205.
-(pdftex.def)             Requested size: 232.19843pt x 143.57846pt.
- [4 <./dijkstraFigures/CacheMissRatevsBlockSize.png> <./dijkstraFigures/CacheMissRatevsSetAssociativity.png> <./dijkstraFigures/CacheMissRatevsReplacementPolicies.png>]
-<dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png, id=37, 602.25pt x 372.39125pt>
-File: dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png Graphic file (type png)
-<use dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png>
-Package pdftex.def Info: dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png  used on input line 216.
-(pdftex.def)             Requested size: 232.19843pt x 143.57846pt.
-<images/rijndael_cachesize.png, id=38, 893.3375pt x 552.0625pt>
-File: images/rijndael_cachesize.png Graphic file (type png)
-<use images/rijndael_cachesize.png>
-Package pdftex.def Info: images/rijndael_cachesize.png  used on input line 229.
-(pdftex.def)             Requested size: 232.19843pt x 143.49074pt.
-<images/rijndael_blocksize.png, id=39, 893.3375pt x 552.0625pt>
-File: images/rijndael_blocksize.png Graphic file (type png)
-<use images/rijndael_blocksize.png>
-Package pdftex.def Info: images/rijndael_blocksize.png  used on input line 238.
-(pdftex.def)             Requested size: 232.19843pt x 143.49074pt.
- [5 <./dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png> <./images/rijndael_cachesize.png> <./images/rijndael_blocksize.png>]
-<images/rijndael_missrate_percentchange.png, id=46, 756.8275pt x 462.72874pt>
-File: images/rijndael_missrate_percentchange.png Graphic file (type png)
-<use images/rijndael_missrate_percentchange.png>
-Package pdftex.def Info: images/rijndael_missrate_percentchange.png  used on input line 247.
-(pdftex.def)             Requested size: 232.19843pt x 141.96875pt.
-<images/rijndael_percentdifference.png, id=47, 926.46124pt x 573.14125pt>
-File: images/rijndael_percentdifference.png Graphic file (type png)
-<use images/rijndael_percentdifference.png>
-Package pdftex.def Info: images/rijndael_percentdifference.png  used on input line 256.
-(pdftex.def)             Requested size: 232.19843pt x 143.64351pt.
- [6 <./images/rijndael_missrate_percentchange.png> <./images/rijndael_percentdifference.png>] [7]
-** WARNING: Ignoring useless \section in Appendix (line 295).
+ [3 <./sha/sha_cache_vs_setAssocBL32.png> <./sha/sha_cache_vs_setAssocBL64.png> <./sha/sha_cache_vs_repl8.png> <./sha/sha_avg_cachesize.png>] [4] [5
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--301
+]
+** WARNING: Ignoring useless \section in Appendix (line 224).
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|\OT1/ptm/b/n/8 Cache
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--301
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--301
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 \OT1/ptm/b/n/8 Block
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--301
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|\OT1/ptm/b/n/8 Set
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--301
+Underfull \hbox (badness 10000) in paragraph at lines 230--230
 []|\OT1/ptm/b/n/8 Repl.
  []
 
 
-LaTeX Warning: Float too large for page by 64.1995pt on input line 377.
+LaTeX Warning: Float too large for page by 64.1995pt on input line 306.
 
 
 ** Conference Paper **
@@ -742,26 +706,26 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[8
+[6
 
-] [9] (./gem5CachePaper.aux)
+] [7] (./gem5CachePaper.aux)
 Package logreq Info: Writing requests to 'gem5CachePaper.run.xml'.
 \openout1 = `gem5CachePaper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 13550 strings out of 476001
- 270437 string characters out of 5793198
+ 13488 strings out of 476001
+ 267751 string characters out of 5793198
  1958068 words of memory out of 5000000
- 33819 multiletter control sequences out of 15000+600000
+ 33766 multiletter control sequences out of 15000+600000
  549916 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,11n,92p,1487b,1234s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on gem5CachePaper.pdf (9 pages, 286710 bytes).
+Output written on gem5CachePaper.pdf (7 pages, 183467 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 45 compressed objects within 1 object stream
+ 71 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 68 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
