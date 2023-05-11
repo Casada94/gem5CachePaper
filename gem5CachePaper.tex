@@ -306,11 +306,12 @@ In conclusion, our research has contributed to the understanding of cache perfor
 \onecolumn
 
 \appendix
-\setcounter{section}{0}
+\setcounter{table}{0}
 \section{Sha Simulation Data}
-  \begin{table}
+\vspace{-1cm}
+\begin{table}
     \centering
-    \caption{sha benchmark}
+    \caption{sha benchmark \\ Replacement policy of 1 is LRU, 2 is Random, 3 is FIFO. IC and DC refer to instruction and data cache, respectively.}
     \begin{tabular}{|m{.75cm} |m{.75cm} |m{.8cm} | m{.75cm} | l | l | l | l | l | l | l |}
       \hline
       \textbf{Cache Size} & \textbf{ Block Size} & \textbf{Set Assoc.} & \textbf{Repl. Policy} & \textbf{Inst. Count} & \textbf{IC hit} & \textbf{IC Missed} & \textbf{IC MissRate} & \textbf{DC hit} & \textbf{DC Missed} & \textbf{DC Miss Rate} \\ \hline
@@ -392,7 +393,7 @@ In conclusion, our research has contributed to the understanding of cache perfor
 
 \section{Dijkstra Simulation Data}
     \begin{table}
-      \caption{Dijkstra Benchmark}
+      \caption{Dijkstra Benchmark\\ Replacement policy of 1 is LRU, 2 is Random, 3 is FIFO. IC and DC refer to instruction and data cache, respectively.}
       \centering
         \begin{tabular}{|m{.75cm} |m{.75cm} |m{.8cm} | m{.75cm} | l | l | l | l | l | l | l |}
           \hline
@@ -474,7 +475,7 @@ In conclusion, our research has contributed to the understanding of cache perfor
     \end{tabular}
   \end{table}
 
-<<<<<<< HEAD
+
   \section{Rijndael Simulation Data}
   \begin{table}
     \caption{Rijndael Benchmark. \\ Replacement policy of 1 is LRU, 2 is Random, 3 is FIFO. IC and DC refer to instruction and data cache, respectively.}
@@ -558,8 +559,4 @@ In conclusion, our research has contributed to the understanding of cache perfor
         
   \end{tabular}
 \end{table}
-=======
-  
-  
->>>>>>> dijkstra
 \end{document}
