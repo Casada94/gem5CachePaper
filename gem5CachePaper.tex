@@ -93,7 +93,7 @@ Hardware and Software Configuration:
 We use a Linux-based system for our experiments as that is a base requirement for the gem5 simulator. Additionally the research team purposefully used different types of hardware and operating systems to run the simulations to determine if there were any inconsistencies in the gem5 simulator. Two desktop computers, one operating on Ubuntu 22.04 and the other Debian distro, and a third laptop using WSL were used to run the gem5 simulations. We use gem5 version 20.0.0 for our simulations.
 
 Workloads:
-We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the SPEC95 benchmark quite. The previous paper used two additional workloads, Go and Compress.
+We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the MiBench benchmark suite. The previous paper used two additional workloads, Go and Compress from the SPEC95 suite of benchmarks.
 
 Cache Configurations:
 We evaluate several cache configurations with different sizes, different block sized, associativity, and replacement policies. As seen in the cache sizes configurations used were 16kB, 32kB, and 64kB. Cache block sizes were configuratble to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. The additional configuration used in this study beyond what the original tested are following replacement policies, least recently used, random replacement, and first in first out replacement policy.
@@ -122,19 +122,62 @@ We use gem5's full-system mode to simulate our experiments. In this mode, the en
 Performance Metrics:
 We collect several performance metrics, including execution time, instruction throughput, and cache hit rate. We also collect cache miss rate, cache eviction rate, and average memory access latency to provide a more detailed analysis of cache behavior.
 
-Statistical Analysis:
-We use statistical analysis to compare the performance of different cache configurations. We use the t-test to determine if there are statistically significant differences between the performance of different configurations. We also use analysis of variance (ANOVA) to determine the impact of different cache parameters on performance.
-
-In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and use statistical analysis to determine the significance of our results.
+In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and compare our findings with those of other works to determine the significance of our results.
 
 \section{Results}
-
+In this section the results of each simulation, by benchmark, will be review and thoroughly discussed and analyzed. The target benchmarks are Sha, Dijkstra, and Rijndael.
 
 \subsection{Sha Benchmark}
 
 
+
 \subsection{Dijkstra Benchmark}
 
+In the following section contains the results of simulations using various caceh configurations and the Dijkstra benchmark. Each figure show a different aspect of the cache configurations.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsBlockSize.png}
+  \caption{Miss Rate Comparison of Block Size for Dijkstra Benchmark}
+  \label{fig:MissRateVsBlockSize}
+\end{figure}
+
+The above figure depicts the D-cache miss rate with respect to different overall cache sizes and block size. In addition the set associativity is fixed at 8-way and and the replacement policy is set to Least Recently Used (LRU). These values have been fixed to show only the effects of cache size and block size on D-cache miss rate. 
+
+Significant difference are seen in performance from both cache size changes and block size. For a 16kB cache, changing the block size from 32 bytes to 64 bytes, is nearly as effective at reducing miss rate as doubling the cache size and maintaining the same block size. This finding did not true from 32kB cache to 64kB cache, but across each configuration, doubling the block size resulted in nearly a 50\% reduction in D-cache miss rate.
+
+While Dijkstra benchmark can be very compute heavy, having to calculate distances for many pairs of nodes, it appears that the 100x100 adjacency matrix was still too small test the effectiveness of cache configurations on a 64kB cache. The minute miss rate shown ing the above figure indicates that a significant majority of the D-cache misses consist of conpulsory cache misses, and once the data is loaded the cache can hold all of the data throughout execution.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsSetAssociativity.png}
+  \caption{Miss Rate Comparison of Set Associativity for Dijkstra Benchmark}
+  \label{fig:MissRateVsAssoc}
+\end{figure}
+
+Here we allow ourselves to vary more parts of the configuration. Having only cache replacement policy as a fixed value set to LRU. By comparing neighboring dark(left) and light(right) columns we can compare the effects of cache block size changes for a given set associativity. Looking at the first two columns on the left, we can see that doubling block size does not have nearly the same effect at low associativity, miss reduction of 16\%, as it does with high associativity, reduction of 42\%.
+
+Additionally with this graph we can compare miss rates for the 2:1 rule of thumb in cache configurations. This rule states that doubling associativity and halving the cache size should result in equivalent D-cache miss rates. By inspecting column 3 of set associativity 2 groups, we find the following cache configuartion, Cache Size: 32kB, Block Size: 32 bytes and Replacement Policy: LRU. Next observe column 1 of group 4-way set associativy, the cache configuration is as follows, Cache Size: 16kB, Block Size: 32 bytes and Replacement Policy: LRU. By the rule of thumb we should see that these two columns and configurations resulting in equivalent cache miss rate. This is not what is obversed though. In our simulations using the gem5 simulator and Dijkstra benchmark, here specifically, there is no 2:1 rule of thumb present in any pair of applicable configurations.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsReplacementPolicies.png}
+  \caption{Miss Rate Comparison of Replacement Policies for Dijkstra Benchmark}
+  \label{fig:MissRateVsReplPolicy}
+\end{figure}
+
+Finally we example replacement policy's effects on cache miss rate. In the figure we have fixed set associativity at 8-way, specifically for the replacement policy to have as many options as possible for choosing a victim block. Here we observe significantly reduced returns as compared to other cache configuration changes. LRU does perform best in almost every case, there were two outlier scenarios of 16kB cache size, block size 32 bytes with 2-way and 4-way associativity having greater performance with Random replacement policy. Overall, First In First Out and Random replacement policies appear equivalent in efficacy. 
+
+While LRU policy does perform best in general across the board implementation of a more complex replacement policy, LRU vs FIFO or Random, may not be worth the effort for hardware architects. Particularly in embedded systems where size, power, and cost are off the utmost importance, these findings indicate that replacement policy would be a good starting point for savings across these three metrics.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png}
+  \caption{Miss Rate of Worst, Average, and Best Performing Cache Configurations for Dijkstra Benchmark}
+  \label{fig:WorstAvgBest}
+\end{figure}
+
+In conclusion of Dijkstra benchmark analysis, the above chart plots the miss rate of the worst, average, and best performing cache configurations. For the Dijkstra benchmark, bigger meant better. Bigger Cache, bigger block size and higher associativity were all guarantees of increased performance and significant reductions in miss rate. Many of the previous charts were unable to effectively depict the miss rate of 64kB cache because its miss rates were so minute.
 
 \subsection{Rijndael Benchmark}
 
@@ -204,4 +247,91 @@ Our research has several implications for cache design and optimization. By unde
 In conclusion, our research has contributed to the understanding of cache performance and design using the gem5 simulator. Our results highlight the significant differences in cache performance between different simulators and benchmark suites. We hope that our findings will guide future research in cache design and optimization and improve the accuracy and efficiency of cache performance modeling.
 
 \printbibliography
+\onecolumn
+
+\appendix
+\setcounter{section}{0}
+\section{Dijkstra Simulation Data}
+    \begin{table}
+      \caption{Dijkstra Benchmark}
+      \centering
+        \begin{tabular}{|m{.75cm} |m{.75cm} |m{.8cm} | m{.75cm} | l | l | l | l | l | l | l |}
+          \hline
+          \textbf{Cache Size} & \textbf{ Block Size} & \textbf{Set Assoc.} & \textbf{Repl. Policy} & \textbf{Inst. Count} & \textbf{IC hit} & \textbf{IC Missed} & \textbf{IC MissRate} & \textbf{DC hit} & \textbf{DC Missed} & \textbf{DC Miss Rate} \\ \hline
+          
+          										
+16kB&	32&	1&	1&	225882042&	319363400&	63949 &0.0002	 & 53844950	  &3108738	&0.054584 \\ \hline
+16kB&	32&	1&	2&	225882042&	319363400&	63949 &0.0002	 & 53844950	  &3108738	&0.054584 \\ \hline
+16kB&	32&	1&	3&	225882042&	319363400&	63949 &0.0002	 & 53844950	  &3108738	&0.054584 \\ \hline
+16kB&	32&	2&	1&	225882042&	319423331&	4018  &0.000013&	54694862	&2258826	&0.039661 \\ \hline
+16kB&	32&	2&	2&	225882042&	319422902&	4447  &0.000014&	54905813	&2047875	&0.035957 \\ \hline
+16kB&	32&	2&	3&	225882042&	319423032&	4317  &0.000014&	54607742	&2345946	&0.04119  \\ \hline
+16kB&	32&	4&	1&	225882042&	319424560&	2789  &0.000009&	56021761	&931927	  &0.016363 \\ \hline
+16kB&	32&	4&	2&	225882042&	319424627&	2722  &0.000009&	55728462	&1225226	&0.021513 \\ \hline
+16kB&	32&	4&	3&	225882042&	319424033&	3316  &0.00001	&  55746866 &	1206822	&0.02119  \\ \hline
+16kB&	32&	8&	1&	225882042&	319426027&	1322  &0.000004&	56049483	&904205	  &0.015876 \\ \hline
+16kB&	32&	8&	2&	225882042&	319425830&	1519  &0.000005&	55715846	&1237842	&0.021734 \\ \hline
+16kB&	32&	8&	3&	225882042&	319425977&	1372  &0.000004&	55731617	&1222071	&0.021457 \\ \hline
+16kB&	64&	1&	1&	225882042&	319392138&	35211 &0.00011	&  54210849 &	2740582	&0.048121 \\ \hline
+16kB&	64&	1&	2&	225882042&	319392138&	35211 &0.00011	&  54210849 &	2740582	&0.048121 \\ \hline
+16kB&	64&	1&	3&	225882042&	319392138&	35211 &0.00011	&  54210849 &	2740582	&0.048121 \\ \hline
+16kB&	64&	2&	1&	225882042&	319424577&	2772  &0.000009&	55027664	&1923767	&0.033779 \\ \hline
+16kB&	64&	2&	2&	225882042&	319424252&	3097  &0.00001	&  55123643 &	1827788	&0.032094 \\ \hline
+16kB&	64&	2&	3&	225882042&	319424290&	3059  &0.00001	&  54898513 &	2052918	&0.036047 \\ \hline
+16kB&	64&	4&	1&	225882042&	319425030&	2319  &0.000007&	56390810	&560621	  &0.009844 \\ \hline
+16kB&	64&	4&	2&	225882042&	319425019&	2330  &0.000007&	56156876	&794555	  &0.013951 \\ \hline
+16kB&	64&	4&	3&	225882042&	319424507&	2842  &0.000009&	56181918	&769513	  &0.013512 \\ \hline
+16kB&	64&	8&	1&	225882042&	319426555&	794	  &0.000002&	56426880	&524551	  &0.00921  \\ \hline
+16kB&	64&	8&	2&	225882042&	319426390&	959	  &0.000003&	56139222	&812209	  &0.014261 \\ \hline
+16kB&	64&	8&	3&	225882042&	319426520&	829	  &0.000003&	56161253	&790178	  &0.013875 \\ \hline
+32kB&	32&	1&	1&	225882042&	319423518&	3831  &0.000012&	55489194	&1464494	&0.025714 \\ \hline
+32kB&	32&	1&	2&	225882042&	319423518&	3831  &0.000012&	55489194	&1464494	&0.025714 \\ \hline
+32kB&	32&	1&	3&	225882042&	319423518&	3831  &0.000012&	55489194	&1464494	&0.025714 \\ \hline
+32kB&	32&	2&	1&	225882042&	319425809&	1540  &0.000005&	56453802	&499886	  &0.008777 \\ \hline
+32kB&	32&	2&	2&	225882042&	319425775&	1574  &0.000005&	56369181	&584507	  &0.010263 \\ \hline
+32kB&	32&	2&	3&	225882042&	319425820&	1529  &0.000005&	56368002	&585686	  &0.010284 \\ \hline
+32kB&	32&	4&	1&	225882042&	319426035&	1314  &0.000004&	56502425	&451263	  &0.007923 \\ \hline
+32kB&	32&	4&	2&	225882042&	319425985&	1364  &	0.000004  &	56402575  &	551113	&0.009677 \\ \hline
+32kB&	32&	4&	3&	225882042&	319426025&	1324  &	0.000004  &	56407995  &	545693	&0.009581 \\ \hline
+32kB&	32&	8&	1&	225882042&	319426035&	1314  &	0.000004  &	56506962  &	446726	&0.007844 \\ \hline
+32kB&	32&	8&	2&	225882042&	319425972&	1377  &	0.000004  &	56422545  &	531143	&0.009326 \\ \hline
+32kB&	32&	8&	3&	225882042&	319426026&	1323  &	0.000004  &	56425358  &	528330	&0.009276 \\ \hline
+32kB&	64&	1&	1&	225882042&	319424696&	2653  &	0.000008  &	55663535  &	1287896	&0.022614 \\ \hline
+32kB&	64&	1&	2&	225882042&	319424696&	2653  &	0.000008  &	55663535  &	1287896	&0.022614 \\ \hline
+32kB&	64&	1&	3&	225882042&	319424696&	2653  &	0.000008  &	55663535  &	1287896	&0.022614 \\ \hline
+32kB&	64&	2&	1&	225882042&	319426453&	896	  &0.000003	  &56644758	  &306673	  &0.005385 \\ \hline
+32kB&	64&	2&	2&	225882042&	319426421&	928	  &0.000003	  &56580462	  &370969	  &0.006514 \\ \hline
+32kB&	64&	2&	3&	225882042&	319426470&	879	  &0.000003	  &56585160	  &366271	  &0.006431 \\ \hline
+32kB&	64&	4&	1&	225882042&	319426573&	776	  &0.000002	  &56694001	  &257430	  &0.00452 \\ \hline
+32kB&	64&	4&	2&	225882042&	319426521&	828	  &0.000003	  &56614011	  &337420	  &0.005925 \\ \hline
+32kB&	64&	4&	3&	225882042&	319426561&	788	  &0.000002	  &56619458	  &331973	  &0.005829 \\ \hline
+32kB&	32&	8&	1&	225882042&	319426035&	1314  &	0.000004  &	56506962  &	446726	&0.007844 \\ \hline
+32kB&	32&	8&	2&	225882042&	319425972&	1377  &	0.000004  &	56422545  &	531143	&0.009326 \\ \hline
+32kB&	32&	8&	3&	225882042&	319426026&	1323  &	0.000004  &	56425358  &	528330	&0.009276 \\ \hline
+64kB&	32&	1&	1&	225882042&	319425599&	1750  &	0.000005  &	56589626  &	364062	&0.006392 \\ \hline
+64kB&	32&	1&	2&	225882042&	319425599&	1750  &	0.000005  &	56589626  &	364062	&0.006392 \\ \hline
+64kB&	32&	1&	3&	225882042&	319425599&	1750  &	0.000005  &	56589626  &	364062	&0.006392 \\ \hline
+64kB&	32&	2&	1&	225882042&	319425821&	1528  &	0.000005  &	56844976  &	108712	&0.001909 \\ \hline
+64kB&	32&	2&	2&	225882042&	319425849&	1500  &	0.000005  &	56812936  &	140752	&0.002471 \\ \hline
+64kB&	32&	2&	3&	225882042&	319425848&	1501  &	0.000005  &	56817912  &	135776	&0.002384 \\ \hline
+64kB&	32&	4&	1&	225882042&	319426036&	1313  &	0.000004  &	56918063  &	35625	  &0.000626 \\ \hline
+64kB&	32&	4&	2&	225882042&	319426034&	1315  &	0.000004  &	56905687  &	48001	  &0.000843 \\ \hline
+64kB&	32&	4&	3&	225882042&	319426035&	1314  &	0.000004  &	56903637  &	50051	  &0.000879 \\ \hline
+64kB&	32&	8&	1&	225882042&	319426036&	1313  &	0.000004  &	56949333  &	4355	  &0.000076 \\ \hline
+64kB&	32&	8&	2&	225882042&	319426035&	1314  &	0.000004  &	56947976  &	5712	  &0.0001 \\ \hline
+64kB&	32&	8&	3&	225882042&	319426036&	1313  &	0.000004  &	56947966  &	5722	  &0.0001 \\ \hline
+64kB&	64&	1&	1&	225882042&	319426340&	1009  &	0.000003  &	56679489  &	271942	&0.004775 \\ \hline
+64kB&	64&	1&	2&	225882042&	319426340&	1009  &	0.000003  &	56679489  &	271942	&0.004775 \\ \hline
+64kB&	64&	1&	3&	225882042&	319426340&	1009  &	0.000003  &	56679489  &	271942	&0.004775 \\ \hline
+64kB&	64&	2&	1&	225882042&	319426463&	886	  &0.000003	  &56882379	  &69052	  &0.001212 \\ \hline
+64kB&	64&	2&	2&	225882042&	319426480&	869	  &0.000003	  &56858757	  &92674	  &0.001627 \\ \hline
+64kB&	64&	2&	3&	225882042&	319426492&	857	  &0.000003	  &56863394	  &88037	  &0.001546 \\ \hline
+64kB&	64&	4&	1&	225882042&	319426574&	775	  &0.000002	  &56929917	  &21514	  &0.000378 \\ \hline
+64kB&	64&	4&	2&	225882042&	319426570&	779	  &0.000002	  &56920955	  &30476	  &0.000535 \\ \hline
+64kB&	64&	4&	3&	225882042&	319426573&	776	  &0.000002	  &56919509	  &31922	  &0.000561 \\ \hline
+64kB&	64&	8&	1&	225882042&	319426574&	775	  &0.000002	  &56948181	  &3250	    &0.000057 \\ \hline
+64kB&	64&	8&	2&	225882042&	319426572&	777	  &0.000002	  &56947025	  &4406	    &0.000077 \\ \hline
+64kB&	64&	8&	3&	225882042&	319426574&	775	  &0.000002	  &56946405	  &5026	    &0.000088 \\ \hline
+    \end{tabular}
+  \end{table}
 \end{document}
