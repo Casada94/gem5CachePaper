@@ -196,7 +196,7 @@ The following section contains the results of simulations using various cache co
     \centering
     \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsSetAssociativity64.png}
     \caption{Miss Rate Comparison of Set Associativity with 64 byte Block Size for Dijkstra Benchmark}
-    \label{fig:MissRateVsAssoc64}
+    \label{fig:MissRateVsSetAssoc64}
   \end{figure}
     
 The previous two figures depict the miss rate, in log scale, compared to associativity by cache size, with each graph having a fixed replacement policy of LRU and 32 bytes or 64 bytes respectively as the block size. In these charts we can see that associativity has a major impact on miss rate for the Dijkstra benchmark. 8-way set associativity decreased miss rate by orders of magnitude compared to a direct mapped cache. 8-way set associativity for a given cache size, on average, decreased miss rates by 79\%.
