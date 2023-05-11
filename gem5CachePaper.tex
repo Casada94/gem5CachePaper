@@ -86,19 +86,19 @@ Our research aims to contribute to the understanding of cache performance and de
 
 Our research has the potential to inform cache design and optimization, as well as guide future research in this area. By understanding the impact of cache size, associativity, block size, and replacement policies on performance, we can design more effective caches that improve system performance and energy efficiency. Furthermore, by evaluating the effectiveness of simulation tools such as gem5 and SimpleScalar, we can improve the accuracy and efficiency of cache performance modeling.
 
-\section{Research methodology}
+\section{Research Methodology}
 In this research, we use the gem5 simulator to model various single-core CPU cache configurations and evaluate their performance under different workloads. We describe the experimental methodology below.
 
-Hardware and Software Configuration:
-We use a Linux-based system for our experiments as that is a base requirement for the gem5 simulator. Additionally the research team purposefully used different types of hardware and operating systems to run the simulations to determine if there were any inconsistencies in the gem5 simulator. Two desktop computers, one operating on Ubuntu 22.04 and the other Debian distro, and a third laptop using WSL were used to run the gem5 simulations. We use gem5 version 20.0.0 for our simulations.
+\paragraph{Hardware and Software Configuration}
+We use a Linux-based system for our experiments as that is a base requirement for the gem5 simulator. Additionally the research team purposefully used different types of hardware and operating systems to run the simulations to determine if there were any inconsistencies in the gem5 simulator. The gem5 simulator was ran on two desktop computers, one operating on Ubuntu 22.04 and the other running Debian 11, and a third laptop using WSL. We use gem5 version 20.0.0 for our simulations.
 
-Workloads:
-We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the MiBench benchmark suite.
+\paragraph{Workloads}
+We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, SHA, and Rijndael. The three benchmarks come from the MiBench benchmark suite, designed for embedded processors \cite{990739}.
 
-Cache Configurations:
-We evaluate 72 cache configurations of different sizes, different block size, associativity, and replacement policies. As seen in the cache sizes configurations used were 16kB, 32kB, and 64kB. Cache block sizes were configuratble to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. Additionally the following replacement policies were simulated: Least Recently Used (LRU), Random replacement, and First In First Out (FIFO) replacement policy.
+\paragraph{Cache Configurations}
+We evaluate 72 cache configurations of different sizes, different block size, associativity, and replacement policies. As seen in Table \ref{table:configurations}, the cache sizes used were 16kB, 32kB, and 64kB. Cache block sizes were configured to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. Additionally the following replacement policies were simulated: Least Recently Used (LRU), Random replacement, and First In First Out (FIFO) replacement policy. LRU, Random, and FIFO are common replacement policies. While there may be better replacement policies conceived, for embedded systems, adding additional complexity is limited.
 
-Table \ref{table:configurations} shows the various configurations tested. The three benchmarks come from the MiBench benchmark suite, designed for embedded processors \cite{990739}. LRU, Random, and FIFO are common replacement policies. While there may me better replacement policies conceived, for embedded systems their added complexity is limited.
+Table \ref{table:configurations} shows the various configurations tested. 
 
 \begin{table}[H]
   \centering
@@ -114,13 +114,11 @@ Table \ref{table:configurations} shows the various configurations tested. The th
   \label{table:configurations}
 \end{table}
 
-Simulation Setup:
-We use gem5's full-system mode to simulate our experiments. In this mode, the entire system, including the CPU, cache, and memory hierarchy, is simulated. We run each workload multiple times to ensure the stability of the results and use a warm-up period to ensure that the cache is populated before we start collecting performance data.
+\paragraph{Simulation Setup}
+To compare the results to other papers, we use gem5's system call emulation mode. In this mode, the entire system, including the CPU, cache, and memory hierarchy, is simulated. We run each workload multiple times to ensure the stability of the results and use a warm-up period to ensure that the host cache is populated before we start collecting performance data. While gem5 has a full-system emulation mode, it may provide a result that is not directly comparable to those in system call emulation mode.
 
-Performance Metrics:
-We collect several performance metrics, including execution time, instruction throughput, and cache hit rate. We also collect cache miss rate, cache eviction rate, and average memory access latency to provide a more detailed analysis of cache behavior.
-
-In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and compare our findings with those of other works to determine the significance of our results.
+\paragraph{Performance Metrics}
+We collect several performance metrics, including execution time, instruction throughput, and cache miss rate. We also collect cache eviction rate, and average memory access latency, and derive cache hit rate to provide a more detailed analysis of cache behavior. However, we only focus primarily on cache miss rate with the various configurations. The other metrics collected may be seen in the appendix.
 
 \section{Results}
 In this section the results of each simulation, by benchmark, will be review and thoroughly discussed and analyzed. The target benchmarks are Sha, Dijkstra, and Rijndael.
