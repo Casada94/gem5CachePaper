@@ -270,6 +270,13 @@ We explore the pattern of the relative change between block sizes in Figure \ref
 
 \section{Discussion}
 
+After running the benchmarks in gem5, we get the best configurations for each benchmark. For SHA, a configuration of 64kB cache size, 64 block size, 8 associativity, and LRU replacement performs the best at a miss rate of 0.000007. For Dijkstra, the same configuration performs the best at a miss rate of 0.000057. Likewise with Rijndael, having a miss rate of 0.000007. Therefore, the configuration with the largest cache size, block size, and associativity with the best replacement policy performs the best, regardless of benchmark. While this specific hardware setup may cost more compared to other configurations, it serves well for the purpose of a generic embedded processor.
+
+The 2:1 cache rule of thumb mostly holds for the SHA benchmark, although the low miss rates may cause it to not hold for even smaller configurations. However, it falls apart for the Dijkstra and Rijndael benchmarks, which are more representative as they have miss rates that differ more on different configurations than SHA. Therefore, we cannot say that this 2:1 cache rule of thumb is an accurate one, even for a rule of thumb.
+
+A discrepancy is formed if we compare results to the results obtained by Ullah et. al.. For example, Ullah et. al. obtains a miss rate of 0.0009 on Rijndael for a configuration of 32kB cache size, 1 associativity, and 32 block size. In our experimental results, the best performing miss rate 0.04346 with FIFO replacement policy. As another example, Ullah et. al. has obtained a miss rate of 0.0011 on the SHA benchmark with 16kB cache size, 2 associativity, and 32 block size. The closest miss rate we have obtained with that same configuration is 0.000044 with FIFO replacement policy.
+
+There may be several possible explanations to these discrepancies. First, they both are simulations and they may have additional error due to any bugs in the simulation software itself. It is difficult to say which simulator is more accurate, so caution is advised for those wishing to reproduce. Furthermore, the environments these simulations are run are most likely different in many regards, including the versions of the benchmark itself. The different instruction set architectures simulated may also play a factor, as most SimpleScalar architectures are RISC-based while x86 is CISC.
 
 \section{Future Work}
 The use of gem5 to model various single-core CPU cache configurations provides a powerful tool for evaluating cache performance. Our research has shown that different cache configurations can have a significant impact on performance, and that using simulation tools such as gem5 can provide detailed insights into cache behavior.
