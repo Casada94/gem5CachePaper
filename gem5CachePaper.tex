@@ -128,7 +128,58 @@ In summary, our experimental methodology involves using the gem5 simulator to ev
 In this section the results of each simulation, by benchmark, will be review and thoroughly discussed and analyzed. The target benchmarks are Sha, Dijkstra, and Rijndael.
 
 \subsection{Sha Benchmark}
+In order to evaluate the performance, we conducted a benchmark test using the SHA (Secure Hash Algorithm).SHA is a family of cryptographic hash functions that are used to generate a fixed-size message digest from input data of any size. The message digest is designed to be unique and non-reversible, which makes it useful for verifying the integrity and authenticity of digital information.
 
+There are currently several variants of the SHA algorithm, including SHA-1, SHA-2 (which includes SHA-224, SHA-256, SHA-384, and SHA-512), and SHA-3.
+
+SHA-1 was the first SHA algorithm to be introduced in 1995 and has since been widely used in various cryptographic applications. However, due to security vulnerabilities discovered in SHA-1, it has since been deprecated and is no longer recommended for use in new applications. The SHA-2 family of hash functions, introduced in 2001, is considered to be more secure and is now widely used.
+
+SHA algorithms are commonly used in digital signature applications, as well as in password storage and verification, data integrity checking, and other security protocols. In order to ensure the security and effectiveness of SHA algorithms, it is important to use the appropriate algorithm variant and to follow best practices for key management and message authentication.
+
+From a total of 72 simulations run on the SHA benchmark with multiple variables, different results were obtained on each iteration. The biggest simulated cache miss rate was 0.002082, while the smallest was 0.000007.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sha/sha_avg_cachesize.png}
+    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    % \label{fig:EmpC1-Training}
+\end{figure}
+
+The bar chart illustrates the cache miss rates for different cache sizes, including 16KB, 32KB, and 64KB. The x-axis represents the cache size, while the y-axis represents the cache miss rate. The results show that as the cache size increases, the cache miss rate decreases. The cache miss rate for a 16KB cache size was the highest at 0.0004427916667 on average with a standard deviation of 0.0007721100946. However, as the cache size increased to 32KB and 64KB, the cache miss rates decreased significantly to 0.00001034782609 and 0.00001, respectively, with lower standard deviations of 0.000003083809563 and 0.000003064523511. These findings suggest that a larger cache size can significantly improve the performance of the SHA benchmark by reducing the number of cache misses, ultimately leading to faster processing times.
+
+\space
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_repl.png}
+    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    % \label{fig:EmpC1-Training}
+\end{figure}
+
+For the second observation, we measured the cache miss rates with different replacement policies (LRU, Random, and FIFO) while varying the cache sizes and block sizes. Fig2 shows a bar chart indicating that all three replacement policies exhibit certain similarities in their cache miss rates across different variations of cache size and block size.
+
+
+We observed that the Random and FIFO replacement policies had similar cache miss rates when using a 16kb cache size and a block size of 32. However, the LRU replacement policy had a slightly lower cache miss rate under these conditions. Additionally, we observed a significant drop in cache miss rate for all replacement policies when increasing the block size from 32 to 64 in a 32kb cache size. We also observed that the cache miss rate was lowest when using a 64kb cache size and a block size of 32 or 64, regardless of the replacement policy used. This finding was consistent across all three replacement policies (LRU, Random, and FIFO).
+
+
+For the third measure, we investigated the cache miss rate grouping with different set associativities (1, 2, 4, and 8) and different cache sizes and block sizes. Fig 3 shows the results of our experiments.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_setAssoc.png}
+    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    % \label{fig:EmpC1-Training}
+\end{figure}
+
+We observed that when the set associativity was set to 1, the cache miss rate for a 16kb cache size and block sizes of 32 and 64 was 0.002082 and 0.001342, respectively. However, when the cache size was increased to 32kb and 64kb and the block size was set to 32 or 64, the cache miss rate was significantly lower compared to the previous settings.
+
+Furthermore, we found that with set associativity set as 2, 4, and 8, the cache miss rate was notably low across all configurations of cache size and block size. However, we noticed a slightly higher cache miss rate with a set associativity of 2 and a 16kb cache size compared to other configurations.
+
+We observed that doubling the block size from 32 to 64 resulted in a significant improvement in performance across different cache sizes, set associativity, and replacement policies. On average, the performance improvement was 41.63%.
+
+For instance, when using a 32kb cache size and a set associativity of 2 with the LRU replacement policy, the cache miss rate decreased from 0.000014 to 0.000008 when the block size was increased from 32 to 64. Similarly, when using a 64kb cache size and a set associativity of 4 with the Random replacement policy, the cache miss rate decreased from 0.000013 to 0.000007 with the same increase in block size. These results demonstrate the significant impact of block size on cache performance and highlight the importance of carefully choosing appropriate block sizes when designing cache systems.
+
+The 2:1 rule of thumb, which states that the miss rate of a cache stays the same if the cache size is halved and the block size is doubled, has been widely accepted in computer architecture. However, recent studies have shown that this rule may not hold true for certain workloads. Specifically, in the case of the SHA benchmark, our analysis of 32 tests revealed that the miss rate difference was observed in 18 cases after grouping. This suggests that the 2:1 rule of thumb may not be accurate for this particular workload.
 
 
 \subsection{Dijkstra Benchmark}
