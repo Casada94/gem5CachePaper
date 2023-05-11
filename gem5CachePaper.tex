@@ -126,56 +126,57 @@ In summary, our experimental methodology involves using the gem5 simulator to ev
 In this section the results of each simulation, by benchmark, will be review and thoroughly discussed and analyzed. The target benchmarks are Sha, Dijkstra, and Rijndael.
 
 \subsection{Sha Benchmark}
-In order to evaluate the performance, we conducted a benchmark test using the SHA (Secure Hash Algorithm).SHA is a family of cryptographic hash functions that are used to generate a fixed-size message digest from input data of any size. The message digest is designed to be unique and non-reversible, which makes it useful for verifying the integrity and authenticity of digital information.
+In order to evaluate the performance, we conducted a benchmark test using the SHA (Secure Hash Algorithm).SHA is a family of cryptographic hash functions that are used to generate a fixed-size message digest from input data of any size. The message digest is designed to be unique and non-reversible, which makes it useful for verifying the integrity and authenticity of digital information.There are currently several variants of the SHA algorithm, including SHA-1, SHA-2 (which includes SHA-224, SHA-256, SHA-384, and SHA-512), and SHA-3.
 
-There are currently several variants of the SHA algorithm, including SHA-1, SHA-2 (which includes SHA-224, SHA-256, SHA-384, and SHA-512), and SHA-3.
-
-SHA-1 was the first SHA algorithm to be introduced in 1995 and has since been widely used in various cryptographic applications. However, due to security vulnerabilities discovered in SHA-1, it has since been deprecated and is no longer recommended for use in new applications. The SHA-2 family of hash functions, introduced in 2001, is considered to be more secure and is now widely used.
-
-SHA algorithms are commonly used in digital signature applications, as well as in password storage and verification, data integrity checking, and other security protocols. In order to ensure the security and effectiveness of SHA algorithms, it is important to use the appropriate algorithm variant and to follow best practices for key management and message authentication.
-
-From a total of 72 simulations run on the SHA benchmark with multiple variables, different results were obtained on each iteration. The biggest simulated cache miss rate was 0.002082, while the smallest was 0.000007.
+For the observation, we calculated the cache miss rate using the LRU replacement policy, grouping it with block sizes of 32 and 64, and varying the cache sizes of 16kb, 32kb, and 64kb. Fig 1 illustrates the results of our experiments.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{sha/sha_avg_cachesize.png}
-    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_setAssocBL32.png}
+    \caption{The bar chart illustrates the cache miss rates for different cache sizes, including 16KB, 32KB, and 64KB with LRU replacement policy and 32 block size.}
     % \label{fig:EmpC1-Training}
 \end{figure}
 
-The bar chart illustrates the cache miss rates for different cache sizes, including 16KB, 32KB, and 64KB. The x-axis represents the cache size, while the y-axis represents the cache miss rate. The results show that as the cache size increases, the cache miss rate decreases. The cache miss rate for a 16KB cache size was the highest at 0.0004427916667 on average with a standard deviation of 0.0007721100946. However, as the cache size increased to 32KB and 64KB, the cache miss rates decreased significantly to 0.00001034782609 and 0.00001, respectively, with lower standard deviations of 0.000003083809563 and 0.000003064523511. These findings suggest that a larger cache size can significantly improve the performance of the SHA benchmark by reducing the number of cache misses, ultimately leading to faster processing times.
-
-\space
+With a block size of 32 and a cache size of 16kb, and a set associativity of 1, we observed a cache miss rate of 0.002082. However, as the set associativity increased from 2 to 4, we noticed a drop in the cache miss rate. On the other hand, with cache sizes of 32kb and 64kb, the cache miss rate showed less deviation regardless of the set associativity.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_repl.png}
-    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_setAssocBL64.png}
+    \caption{The bar chart illustrates the cache miss rates for different cache sizes, including 16KB, 32KB, and 64KB with LRU replacement policy and 64 block size.}
     % \label{fig:EmpC1-Training}
 \end{figure}
 
-For the second observation, we measured the cache miss rates with different replacement policies (LRU, Random, and FIFO) while varying the cache sizes and block sizes. Fig2 shows a bar chart indicating that all three replacement policies exhibit certain similarities in their cache miss rates across different variations of cache size and block size.
+Figure 2 presents the cache miss rate results with a block size set as 64, a cache size of 16kb, and a set associativity of 1. In this configuration, the cache miss rate was observed to be 0.001342. Interestingly, when comparing the results with block sizes of 32 and 64, we noticed that the cache miss rate with a block size of 64 was nearly half of that with a block size of 32.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_repl8.png}
+    \caption{Cache miss rates with different replacement policies (LRU, Random, and FIFO) with varying the cache sizes and block sizes.}
+    % \label{fig:EmpC1-Training}
+\end{figure}
+
+Fig3 shows a bar chart indicating that all three replacement policies exhibit certain similarities in their cache miss rates across different variations of cache size and block size.
 
 
 We observed that the Random and FIFO replacement policies had similar cache miss rates when using a 16kb cache size and a block size of 32. However, the LRU replacement policy had a slightly lower cache miss rate under these conditions. Additionally, we observed a significant drop in cache miss rate for all replacement policies when increasing the block size from 32 to 64 in a 32kb cache size. We also observed that the cache miss rate was lowest when using a 64kb cache size and a block size of 32 or 64, regardless of the replacement policy used. This finding was consistent across all three replacement policies (LRU, Random, and FIFO).
 
 
-For the third measure, we investigated the cache miss rate grouping with different set associativities (1, 2, 4, and 8) and different cache sizes and block sizes. Fig 3 shows the results of our experiments.
+From a total of 72 simulations run on the SHA benchmark with multiple configurations, different results were obtained on each iteration. The biggest simulated cache miss rate was 0.002082, while the smallest was 0.000007.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{sha/sha_cache_vs_setAssoc.png}
-    \caption{Average of Cache Miss rate and STDEV with different cache sizes}
+    \includegraphics[width=0.45\textwidth]{sha/sha_avg_cachesize.png}
+    \caption{The bar chart illustrates the cache miss rates for different cache sizes, including 16KB, 32KB, and 64KB. The x-axis represents the cache size, while the y-axis represents the cache miss rate.}
     % \label{fig:EmpC1-Training}
 \end{figure}
 
-We observed that when the set associativity was set to 1, the cache miss rate for a 16kb cache size and block sizes of 32 and 64 was 0.002082 and 0.001342, respectively. However, when the cache size was increased to 32kb and 64kb and the block size was set to 32 or 64, the cache miss rate was significantly lower compared to the previous settings.
+The results show that as the cache size increases, the cache miss rate decreases. The cache miss rate for a 16KB cache size was the highest at 0.0004427916667 on average with a standard deviation of 0.0007721100946. However, as the cache size increased to 32KB and 64KB, the cache miss rates decreased significantly to 0.00001034782609 and 0.00001, respectively, with lower standard deviations of 0.000003083809563 and 0.000003064523511. These findings suggest that a larger cache size can significantly improve the performance of the SHA benchmark by reducing the number of cache misses, ultimately leading to faster processing times.
 
-Furthermore, we found that with set associativity set as 2, 4, and 8, the cache miss rate was notably low across all configurations of cache size and block size. However, we noticed a slightly higher cache miss rate with a set associativity of 2 and a 16kb cache size compared to other configurations.
+\space
+
 
 We observed that doubling the block size from 32 to 64 resulted in a significant improvement in performance across different cache sizes, set associativity, and replacement policies. On average, the performance improvement was 41.63%.
-
-For instance, when using a 32kb cache size and a set associativity of 2 with the LRU replacement policy, the cache miss rate decreased from 0.000014 to 0.000008 when the block size was increased from 32 to 64. Similarly, when using a 64kb cache size and a set associativity of 4 with the Random replacement policy, the cache miss rate decreased from 0.000013 to 0.000007 with the same increase in block size. These results demonstrate the significant impact of block size on cache performance and highlight the importance of carefully choosing appropriate block sizes when designing cache systems.
 
 The 2:1 rule of thumb, which states that the miss rate of a cache stays the same if the cache size is halved and the block size is doubled, has been widely accepted in computer architecture. However, recent studies have shown that this rule may not hold true for certain workloads. Specifically, in the case of the SHA benchmark, our analysis of 32 tests revealed that the miss rate difference was observed in 18 cases after grouping. This suggests that the 2:1 rule of thumb may not be accurate for this particular workload.
 
@@ -233,40 +234,40 @@ In conclusion of Dijkstra benchmark analysis, the above chart plots the miss rat
 
 \subsection{Rijndael Benchmark}
 
-MiBench provides an implementation of Rijndael. While modern desktop CPUs have instructions for Rijndael\cite{gueron2010intel}, they may not be implemented on embedded systems or on systems with small cache configurations. Figure \ref{fig:rijndael-cachesize} shows the miss rates on configurations with 16kB, 32kB, and 64kB of cache size and 1, 2, 4, and 8 associativity. The configuration with cache size of 16kB and an associativity of 1 shows the highest miss rate at 0.1529. It significantly improves if the cache size or the associativity changes. The miss rates with respect to cache size is monotonically decreasing. That is, a cache size of 16kB with associativity remaining the same will always perform worse than 32kB, and the same with 32kB compared to 64kB. Furthermore, miss rates with respect to associativity also monotonically decreases. The 2:1 cache rule of thumb applies for the configuration of 32kB cache size and 1 associativity compared to the 16kB cache size and 2 associativity, having miss rates 0.0424 and 0.0464, respectively. However, it quickly falls apart with configurations of 64kB cache size and 1 associativity and of 32kB cache size and 2 associativity, having miss rates 0.0353 and 0.0239. The gap continues to increase for larger configurations.
+MiBench provides an implementation of Rijndael. While modern desktop CPUs have instructions for Rijndael\cite{gueron2010intel}, they may not be implemented on embedded systems or on systems with small cache configurations. Figure \ref{fig:rijndael-missrate-assoc-32} shows the miss rates on configurations with 16kB, 32kB, and 64kB of cache size; 1, 2, 4, and 8 associativity; and 32 cache size. The configuration with cache size of 16kB and an associativity of 1 shows the highest miss rate at 0.1535. It significantly improves if the cache size or the associativity changes. The miss rates with respect to cache size is monotonically decreasing. That is, a cache size of 16kB with associativity remaining the same will always perform worse than 32kB, and the same with 32kB compared to 64kB. Furthermore, miss rates with respect to associativity also monotonically decreases. The 2:1 cache rule of thumb applies for the configuration of 32kB cache size and 1 associativity compared to the 16kB cache size and 2 associativity, having miss rates 0.0447 and 0.0376, respectively. However, it quickly falls apart with configurations of 64kB cache size and 1 associativity and of 32kB cache size and 2 associativity, having miss rates 0.0383 and 0.0200. The gap continues to increase for larger configurations.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.45\textwidth]{images/rijndael_cachesize.png}
-    \caption{The miss rate on configurations with different set associativities and cache sizes. The miss rates on the D-cache are on a logarithmic scale to represent the large disparities in the miss rates. Smaller values are better.}
-    \label{fig:rijndael-cachesize}
+    \includegraphics[width=0.45\textwidth]{images/missrate_assoc_32}
+    \caption{The miss rate on configurations with different set associativities and cache sizes. The miss rates on the D-cache are on a logarithmic scale to represent the large disparities in the miss rates. Only LRU replacement policy is shown, but the pattern remains the same with other replacement policies (although their extent differs). Smaller values are better.}
+    \label{fig:rijndael-missrate-assoc-32}
 \end{figure}
 
-Figure \ref{fig:rijndael-blocksize} shows the miss rates on configurations with block size of either 32 or 64 and an associativity of 1, 2, 4, and 8. Unlike Figure \ref{fig:rijndael-cachesize}, the miss rates are not monotonically decreasing as the cache size or associativity increases. For an associativity of 1, the miss rates for a configuration with a block size of 32 slightly loses over a configuration of a block size of 64 (miss rates 0.0780 and 0.0758, respectively). This pattern does not hold for larger associativities. However, with the exception of an associativity of 1, the larger the associativity, the smaller the difference between the block sizes. 
+Figure \ref{fig:rijndael-missrate-assoc-64} shows the miss rates on configurations similar to that on Figure \ref{fig:rijndael-missrate-assoc-32}, but with 64 block size. The difference in miss rates compared to the 32 block size is less than one percentage point with the exception of a configuration of 16kB of cache size and an associativity of 2, where it has a difference of 1.06\%.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.45\textwidth]{images/rijndael_blocksize.png}
-  \caption{The D-cache miss rate on configurations with different set associativities and block sizes. Smaller values are better.}
-  \label{fig:rijndael-blocksize}
+  \includegraphics[width=0.45\textwidth]{images/missrate_assoc_64}
+  \caption{The D-cache miss rate on configurations with different set associativities and block sizes. Only LRU replacement policy is shown, but the pattern remains the same with other replacement policies (although their extent differs). Log graph, smaller values are better.}
+  \label{fig:rijndael-missrate-assoc-64}
 \end{figure}
 
-This pattern is explored more in Figure \ref{fig:rijndael-missrate-percentchange}. Looking solely at the cache size, increasing block size on larger cache size often lowers miss rate. If we break down by associativity, an associativity of 1 always benefits from a larger block size, an associativity of 4 and 8 improve with larger cache sizes. The exception is a configuration with associativity of 2, as that will always benefit from a block size of 32.
+Figure \ref{fig:rijndael-missrate-replacement} shows the miss rates on configurations with varying replacement policies. Similar to other researchers, LRU performs the best out of the three, indicating that it is a good replacement policy and has been simulated correctly. Random has the highest miss rate with a configuration of 16kB of cache size and 64 block size at 0.0278. FIFO outperforms random replacement policy on configurations with 16kB cache size, but random has a lower miss rate for 32kB cache size. For 64kB cache size, they are equal, having 0.000013 and 0.000007 miss rate for 32 and 64 block size, respectively.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.45\textwidth]{images/rijndael_missrate_percentchange.png}
-  \caption{The percent change of D-cache miss rate from configurations with 32 vs 64 block size. Only LRU replacement policy is shown, but the pattern remains the same with other replacement policies (although their extent differs). Smaller values are better.}
+  \includegraphics[width=0.45\textwidth]{images/missrate_replacement}
+  \caption{The D-cache miss rate on configurations with different replacement policies, cache size, and block size. Only configurations with a set associativity of 8 is shown. Smaller values are better.}
+  \label{fig:rijndael-missrate-replacement}
+\end{figure}
+
+We explore the pattern of the relative change between block sizes in Figure \ref{fig:rijndael-missrate-percentchange}. Looking solely at the cache size, increasing block size on larger cache size often lowers miss rate. If we break down by associativity, an associativity of 1 always benefits from a larger block size, an associativity of 4 and 8 improve with larger cache sizes. The exception is a configuration with associativity of 2, as that will always benefit from a block size of 32.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{images/rijndael_missrate_percentchange}
+  \caption{The percent change of D-cache miss rate from configurations with 32 vs 64 block size. Only LRU replacement policy is shown, but the pattern remains the same with other replacement policies (although their extent differs).}
   \label{fig:rijndael-missrate-percentchange}
-\end{figure}
-
-Expanding more on the 2:1 cache rule of thumb, Figure \ref{fig:rijndael-percentdifference} shows the percent difference of "cache rule of thumb" configurations. That is, the percent difference between a configuration with $n$ cache size and $x$ associativity and a configuration with $n/2$ cache size and $2x$ associativity. A value of zero indicates that the two values are the same. If many runs exhibit a percent difference close to zero, then the cache rule of thumb would hold for Rijndael benchmarks. However, 19 out of 35 runs exhibit a percent difference of greater than 50\%, indicating a significant deviation from the supposed 2:1 cache rule of thumb.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.45\textwidth]{images/rijndael_percentdifference.png}
-  \caption{The percent difference of D-cache miss rates of cache rule of thumb configurations. Values closer to 0 are better.}
-  \label{fig:rijndael-percentdifference}
 \end{figure}
 
 \section{Discussion}
