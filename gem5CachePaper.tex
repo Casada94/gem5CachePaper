@@ -93,7 +93,7 @@ Hardware and Software Configuration:
 We use a Linux-based system for our experiments as that is a base requirement for the gem5 simulator. Additionally the research team purposefully used different types of hardware and operating systems to run the simulations to determine if there were any inconsistencies in the gem5 simulator. Two desktop computers, one operating on Ubuntu 22.04 and the other Debian distro, and a third laptop using WSL were used to run the gem5 simulations. We use gem5 version 20.0.0 for our simulations.
 
 Workloads:
-We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the SPEC95 benchmark quite. The previous paper used two additional workloads, Go and Compress.
+We use a variety of benchmark workloads to evaluate the performance of different cache configurations. The specific benchmarks used in this research are Dijkstra, Sha, and Rijndael from the MiBench benchmark suite. The previous paper used two additional workloads, Go and Compress from the SPEC95 suite of benchmarks.
 
 Cache Configurations:
 We evaluate several cache configurations with different sizes, different block sized, associativity, and replacement policies. As seen in the cache sizes configurations used were 16kB, 32kB, and 64kB. Cache block sizes were configuratble to 32 bytes and 64 bytes. The final configurations that were used for the original research was set associativities of 1, 2, 4, and 8. The additional configuration used in this study beyond what the original tested are following replacement policies, least recently used, random replacement, and first in first out replacement policy.
@@ -122,10 +122,7 @@ We use gem5's full-system mode to simulate our experiments. In this mode, the en
 Performance Metrics:
 We collect several performance metrics, including execution time, instruction throughput, and cache hit rate. We also collect cache miss rate, cache eviction rate, and average memory access latency to provide a more detailed analysis of cache behavior.
 
-Statistical Analysis:
-We use statistical analysis to compare the performance of different cache configurations. We use the t-test to determine if there are statistically significant differences between the performance of different configurations. We also use analysis of variance (ANOVA) to determine the impact of different cache parameters on performance.
-
-In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and use statistical analysis to determine the significance of our results.
+In summary, our experimental methodology involves using the gem5 simulator to evaluate various single-core CPU cache configurations under different workloads. We use a range of performance metrics to compare the performance of different configurations and compare our findings with those of other works to determine the significance of our results.
 
 \section{Results}
 In this section the results of each simulation, by benchmark, will be review and thoroughly discussed and analyzed. The target benchmarks are Sha, Dijkstra, and Rijndael.
@@ -142,7 +139,7 @@ In the following section contains the results of simulations using various caceh
   \centering
   \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsBlockSize.png}
   \caption{Miss Rate Comparison of Block Size for Dijkstra Benchmark}
-  \label{fig:EmpC1-Training}
+  \label{fig:MissRateVsBlockSize}
 \end{figure}
 
 The above figure depicts the D-cache miss rate with respect to different overall cache sizes and block size. In addition the set associativity is fixed at 8-way and and the replacement policy is set to Least Recently Used (LRU). These values have been fixed to show only the effects of cache size and block size on D-cache miss rate. 
@@ -155,7 +152,7 @@ While Dijkstra benchmark can be very compute heavy, having to calculate distance
   \centering
   \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsSetAssociativity.png}
   \caption{Miss Rate Comparison of Set Associativity for Dijkstra Benchmark}
-  \label{fig:EmpC1-Training}
+  \label{fig:MissRateVsAssoc}
 \end{figure}
 
 Here we allow ourselves to vary more parts of the configuration. Having only cache replacement policy as a fixed value set to LRU. By comparing neighboring dark(left) and light(right) columns we can compare the effects of cache block size changes for a given set associativity. Looking at the first two columns on the left, we can see that doubling block size does not have nearly the same effect at low associativity, miss reduction of 16\%, as it does with high associativity, reduction of 42\%.
@@ -166,7 +163,7 @@ Additionally with this graph we can compare miss rates for the 2:1 rule of thumb
   \centering
   \includegraphics[width=0.45\textwidth]{dijkstraFigures/CacheMissRatevsReplacementPolicies.png}
   \caption{Miss Rate Comparison of Replacement Policies for Dijkstra Benchmark}
-  \label{fig:EmpC1-Training}
+  \label{fig:MissRateVsReplPolicy}
 \end{figure}
 
 Finally we example replacement policy's effects on cache miss rate. In the figure we have fixed set associativity at 8-way, specifically for the replacement policy to have as many options as possible for choosing a victim block. Here we observe significantly reduced returns as compared to other cache configuration changes. LRU does perform best in almost every case, there were two outlier scenarios of 16kB cache size, block size 32 bytes with 2-way and 4-way associativity having greater performance with Random replacement policy. Overall, First In First Out and Random replacement policies appear equivalent in efficacy. 
@@ -177,7 +174,7 @@ While LRU policy does perform best in general across the board implementation of
   \centering
   \includegraphics[width=0.45\textwidth]{dijkstraFigures/MissRateofWorstAverageBestCacheConfiguration.png}
   \caption{Miss Rate of Worst, Average, and Best Performing Cache Configurations for Dijkstra Benchmark}
-  \label{fig:EmpC1-Training}
+  \label{fig:WorstAvgBest}
 \end{figure}
 
 In conclusion of Dijkstra benchmark analysis, the above chart plots the miss rate of the worst, average, and best performing cache configurations. For the Dijkstra benchmark, bigger meant better. Bigger Cache, bigger block size and higher associativity were all guarantees of increased performance and significant reductions in miss rate. Many of the previous charts were unable to effectively depict the miss rate of 64kB cache because its miss rates were so minute.
